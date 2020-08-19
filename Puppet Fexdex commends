@@ -9,8 +9,8 @@ sudo chown <userID> -R <folder>    ## [change the owner of the folder]
 sudo chgrp <userID> -R <folder>     ## [change the group of the folder]
 sudo chmod -R 0777 <file/folder>        ##  [To Give total permission]
 
-
-
+cat mytext.txt > newfile.txt       ## copy the out put of the cat commend to the file
+cat mytext.txt >> another-text-file.txt    ## Append/Add text to the file 
 
 
 
