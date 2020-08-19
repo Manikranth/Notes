@@ -1,0 +1,44 @@
+id [show user’s group]
+sudo –l [list the sudo permissions]
+df –h
+grep --color=always  <word>
+grep --after-context=5 --before-context=10 <word> <file>
+shutdown -r now
+chmod +x ~/myscript.sh                              
+sudo chown <userID> -R <folder>    ## [change the owner of the folder]
+sudo chgrp <userID> -R <folder>     ## [change the group of the folder]
+sudo chmod -R 0777 <file/folder>        ##  [To Give total permission]
+
+
+
+
+
+
+rpm -qa | grep <s/w name>	     		##[to find the available software]
+sudo mco ping -I <server_name>
+sudo su - fdx_3748658						  ## [switch user]
+ps –ef | grep 	          				     	##    [running servers]
+sudo /etc/init.d/clo ud-elmo stop		     ##	 [stop elmo services]
+sudo –u <User> <command> 				##  [use command as the user]
+sudo puppet cert clean <Host name>   ## [remove the agent cerit in master]
+sudo puppet cert list <Host name>      ## [list all the unsigned cerit in master]
+			         --all 			                    ## [to see signed and unsigned]
+sudo puppet cert sign <Host name>     ## [sign the agent cerit in master]
+ps –fu cloudsvc
+sudo -u cloudsvc /opt/fedex/cloud/pla*/current/bin/status_platform_service
+
+
+
+Paths:
+cd /var/lib/puppet/ssl/
+Cat /etc/passwd							   [To view the user]
+Cd var/fedex/cloud/ip/logs/					            [ip logs]
+cd /var/fedex/mkacct/includes/                      [To puchtocluster]
+cat ect/puppetlabs/puppet/puppet.conf
+cd /var/fedex/cloud/alacarte/data/manifests/               [manifests]
+cd /var/fedex/cloud/platform_service/logs              [Platform_logs]
+cd /var/fedex/cloud/alacarte/logs/			       [alacart_logs]
+cat /var/log/puppet/puppet-agent.log  			         [Agent_logs]
+cd /var/fedex/cloud/acct/logs/                              [act_logs]
+cd /opt/fedex/cloud/elmo/current/bin/
+grep c0011026 /var/fedex/cloud/placement/logs/application*log [to see that SID and PID of the host that even de’comed]
