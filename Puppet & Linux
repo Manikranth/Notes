@@ -1,10 +1,16 @@
+PUPPET
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+System requrments:
+-------------------
 Has to have the persistent Hoatname 
-System requrment - 2cpu /4 ram  for Master 
+ - 2cpu /4 ram  for Master 
 No windowes for master 
 Puppet need the port 8140 to open  
 Need time sync
 
-
+Puppet in EC2:
+--------------
 Create Ec2 - ports are open on your new EC2 instance:
 
 443 — HTTPS
@@ -13,41 +19,45 @@ Create Ec2 - ports are open on your new EC2 instance:
 
 https://puppet.com/try-puppet/puppet-enterprise/download/
 
+	Master:
+	-------
 
+		## hostname maping -----------------
+		ifconfig -a
+		nano /etc/hosts
+		     <ip>    <hostname (puppet.munn.com)> puppet
+		hostnamectl set-hostname puppet.munna.com
+		systemctl status firewalld
 
-Master:
--------
+		# installing puppet --------------------
+		yum install wget
+		wget the package for the master 
 
-## hostname maping -----------------
-ifconfig -a
-nano /etc/hosts
-     <ip>    <hostname (puppet.munn.com)> puppet
-hostnamectl set-hostname puppet.munna.com
-systemctl status firewalld
+		rtpm -qpi <package name>     						## if its .rpm
+		tar -xzvf puppet-enterprise-2019.8.1-redhatfips-7-x86_64.tar.gz         ##if tar and unpack the tarball
 
-# installing puppet --------------------
-yum install wget
-wget the package for the master 
+		systemctl status puppet							## status of the puppet
+		systemctl start puppet							## start of the puppet
 
-rtpm -qpi <package name>     						## if its .rpm
-tar -xzvf puppet-enterprise-2019.8.1-redhatfips-7-x86_64.tar.gz         ##if tar and unpack the tarball
+		sudo /opt/puppetlabs/bin/puppetserver ca list --all
+		sudo /opt/puppetlabs/bin/puppetserver ca sign <hostname> / --all
 
-systemctl status puppet							## status of the puppet
-systemctl start puppet							## start of the puppet
+		To automate the process the process we can use the "autosign.conf":
+			-- autosign.conf   							## path /ect/puppetlabs/puppet/autosign.conf
+				<full hostname>
+				<*.company.com>
+				after the modifing the autosign.conf do not for get to restart the puppet server - systemctl restart puppet
 
-sudo /opt/puppetlabs/bin/puppetserver ca list --all
-sudo /opt/puppetlabs/bin/puppetserver ca sign <hostname> / --all
+	Agent:
+	-------
+		wget the package for the  node
+		rtpm -qpi <package name>
+		nano /etc/puppetlab/puppet/puppet.conf
+		     - copy the master hostname under the 
+		       [main]
+		       server = ip-172-31-31-80.us-east-2.compute.internal 
 
-Agent:
--------
-wget the package for the  node
-rtpm -qpi <package name>
-nano /etc/puppetlab/puppet/puppet.conf
-     - copy the master hostname under the 
-       [main]
-       server = ip-172-31-31-80.us-east-2.compute.internal 
-       
-Run pupprt agent -t   				##certificate management 
+		Run pupprt agent -t   				##certificate management 
 
 
 Puppet commends: 
