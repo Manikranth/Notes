@@ -1,5 +1,38 @@
 PUPPET
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Puppet users 'facts' as the first step of the puppet to gather inventory date from the agent to masters with key value pairs called "Facts"
+-- Fact contain - ip adderss, hostnames, kornal version  and use the info to compalil 'catalog'
+-- Catalog - is a drift d/w the expected configration and current version and send back to the agent 
+-- After the rtesiving the catalog from the puppet master, puppet agent will act on the changes imedetally by applying the new configration 
+
+Pupet Building Blocks:
+----------------------
+Resources - are the inbuilt funations that run in the back end to perfrom underlying operations in puppet. - file resources type (services rt to manages servicess and user rt ti manage users)
+Class - multy samll operation working for the single goel.
+Manifest - Directory containing puppet DSL files with ".pp (puppet program)" extenction. Puppet program contaion of defination/declareation of puppet class. 
+Modules - are the collection of files and directorys sudn has - manifest, cless defination. There are the shearable and reuseable like - mySQL , junkies module to manage jankies 
+
+					Example - 
+					----------	  
+									File.py  ----  Manifest
+									#class   ------ class
+									class user:
+										#functiion  ---- resources
+										def cearte_user
+										# code here
+										end
+									end
+						Modules - number of sudh file used to manage 
+						
+						
+						
+Resources:
+-----------
+All operation are happen in puppet are done by the resources. - Files, user, computer, packages, group .... 
+There are 3 types 
+	-- core/built-in - Which are perbuilt that shiped with puppet.
+	-- Defined - These are the puppet defined flexbely resourcesn to. 
+	-- custom -  write our own customizes resources type in Rudy.
 
 System requrments:
 -------------------
@@ -62,6 +95,10 @@ https://puppet.com/try-puppet/puppet-enterprise/download/
 
 Puppet commends: 
 ----------------
+puppet help resource Or puppet resource --help  		## list all actions
+puppet resource --types 					## list all resource type 
+
+
 sudo puppet cert clean <Host name>   				## [remove the agent cerit in master]
 sudo puppet cert list <Host name>     				## [list all the unsigned cerit in master]
 			         --all 			        ## [to see signed and unsigned]
