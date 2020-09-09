@@ -184,7 +184,7 @@ sudo –u <User> <command> 				##  [use command as the user]
 ps –fu cloudsvc
 sudo -u cloudsvc /opt/fedex/cloud/pla*/current/bin/status_platform_service
 
-
+sudo /usr/sbin/alternatives --config java
 
 
 
