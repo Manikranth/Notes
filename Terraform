@@ -1,5 +1,14 @@
 It witten in the ashi corp conf lang with .tf extantion. it rewriten in the declarative mammer means - it do not run the run code but accutally check the cloud (where ever you are creating) and make sure it has all the instancres are persent. 
 
+File system:
+------------
+Terraform foulder:
+Terraform foulder is created when you run the terrafrom init so that it download the plugins that are need for the "provider" menctioned in the code. 
+
+Terraform.tfstatus:
+Terraform creates a terrafrom.tf status file to keep track for itself of what it created whenever terraform apply is run. it checks terraform.tfstatus file to make sure what need to be added or changed. 
+
+
 Common commands:
 
                                     (CLI- commends)
@@ -14,7 +23,10 @@ Common commands:
                                         import             Import existing infrastructure into Terraform
 
                                         init               Initialize a Terraform working directory
-
+                                                           Without running "init" terrafrom will not download the plugins to run the code.
+                                                           if you are ruuning the provider for the first time you need to run "terraform init"
+                                                           Error: Could not load plugin -Plugin reinitialization required. Please run "terraform init".
+                                        
                                         login              Obtain and save credentials for a remote host
                                         logout             Remove locally-stored credentials for a remote host
                                         output             Read an output from a state file
@@ -73,6 +85,29 @@ A provider is responsible for understanding API interactions and exposing resour
                                                  Name = "Terraform - 2"
                                                }
                                              }
+
+AWS_VPC
+--------
+
+resource "aws_vpc" "terraformvcp" {
+  cidr_block = "10.0.0.0/16"  # ip addr from the VPC
+  tags = {
+    Name = "Prod-VPC"      
+    }
+}
+
+resource "aws_subnet" "terraformsubnet" {
+  vpc_id     = aws_vpc.terraformvcp.id    #vpc_id     = <resource>.<resource_name in the terraqform>.id
+                                         # IP addr of the VCP where the subnet reside in. as it should have to take from the VCP (Not yet created VCP from the acode about).
+ cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "Prod_subnet"
+  }
+}
+
+
+
 
 
 
