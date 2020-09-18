@@ -5,8 +5,9 @@ File system:
 Terraform foulder:
 Terraform foulder is created when you run the terrafrom init so that it download the plugins that are need for the "provider" menctioned in the code. 
 
-Terraform.tfstatus:
-Terraform creates a terrafrom.tf status file to keep track for itself of what it created whenever terraform apply is run. it checks terraform.tfstatus file to make sure what need to be added or changed. 
+Terraform.tfstate:
+Terraform creates a terrafrom.tfstate file to keep track for itself of what it created whenever terraform apply is run. it checks terraform.tfstate file to make sure what need to be added or changed. 
+Bassically it's way for the terraaform to what is that it created.
 
 
 Common commands:
