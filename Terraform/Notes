@@ -1,1 +1,114 @@
-HI
+It witten in the ashi corp conf lang with .tf extantion. it rewriten in the declarative mammer means - it do not run the run code but accutally check the cloud (where ever you are creating) and make sure it has all the instancres are persent. 
+
+File system:
+------------
+Terraform foulder:
+Terraform foulder is created when you run the terrafrom init so that it download the plugins that are need for the "provider" menctioned in the code. 
+
+Terraform.tfstate:
+Terraform creates a terrafrom.tfstate file to keep track for itself of what it created whenever terraform apply is run. it checks terraform.tfstate file to make sure what need to be added or changed. 
+Bassically it's way for the terraaform to what is that it created.
+
+
+Common commands:
+
+                                    (CLI- commends)
+                                        apply              Builds or changes infrastructure
+
+                                        console            Interactive console for Terraform interpolations
+                                        destroy            Destroy Terraform-managed infrastructure
+                                        env                Workspace management
+                                        fmt                Rewrites config files to canonical format
+                                        get                Download and install modules for the configuration
+                                        graph              Create a visual graph of Terraform resources
+                                        import             Import existing infrastructure into Terraform
+
+                                        init               Initialize a Terraform working directory
+                                                           Without running "init" terrafrom will not download the plugins to run the code.
+                                                           if you are ruuning the provider for the first time you need to run "terraform init"
+                                                           Error: Could not load plugin -Plugin reinitialization required. Please run "terraform init".
+                                        
+                                        login              Obtain and save credentials for a remote host
+                                        logout             Remove locally-stored credentials for a remote host
+                                        output             Read an output from a state file
+
+                                        plan               Generate and show an execution plan
+
+                                        providers          Prints a tree of the providers used in the configuration
+                                        refresh            Update local state file against real resources
+                                        show               Inspect Terraform state or plan
+                                        taint              Manually mark a resource for recreation
+                                        untaint            Manually unmark a resource as tainted
+                                        validate           Validates the Terraform files
+                                        version            Prints the Terraform version
+                                        workspace          Workspace management
+
+                                    All other commands:
+                                        0.12upgrade        Rewrites pre-0.12 module source code for v0.12
+                                        0.13upgrade        Rewrites pre-0.13 module source code for v0.13
+                                        debug              Debug output management (experimental)
+                                        force-unlock       Manually unlock the terraform state
+                                        push               Obsolete command for Terraform Enterprise legacy (v1)
+                                        state              Advanced state management
+
+
+
+Providers
+-----------
+Terraform is used to create, manage, and update infrastructure resources such as physical machines, VMs, network switches, containers, and more. Almost any infrastructure type can be represented as a resource in Terraform.
+
+A provider is responsible for understanding API interactions and exposing resources. Most providers configure a specific infrastructure platform (either cloud or self-hosted). Providers can also offer local utilities for tasks like generating random numbers for unique resource names.
+ - To work with the terraform we need to install the nessary plugins to communate with the Providers. 
+ 
+
+                                            provider "aws" {
+                                              region  = "us-east-1"
+                                              access_key = "AKIAIQALPXYK5CCNX2IA"
+                                              secret_key = "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"
+                                            }
+
+                                            # resource "<provider>_<resource_type>" "name" {
+                                            #    config options......
+                                            #}
+
+                                             resource "aws_instance" "Test_terraform" {
+                                               ami           = "ami-00514a528eadbc95b"
+                                               instance_type = "t2.micro"
+                                               tags = {
+                                                 Name = "Terraform"
+                                               }
+                                             }
+
+                                             resource "aws_instance" "Test_terraformtwo" {
+                                               ami           = "ami-00514a528eadbc95b"
+                                               instance_type = "t2.micro"
+                                               tags = {
+                                                 Name = "Terraform - 2"
+                                               }
+                                             }
+
+AWS_VPC
+--------
+
+resource "aws_vpc" "terraformvcp" {
+  cidr_block = "10.0.0.0/16"  # ip addr from the VPC
+  tags = {
+    Name = "Prod-VPC"      
+    }
+}
+
+resource "aws_subnet" "terraformsubnet" {
+  vpc_id     = aws_vpc.terraformvcp.id    #vpc_id     = <resource>.<resource_name in the terraqform>.id
+                                         # IP addr of the VCP where the subnet reside in. as it should have to take from the VCP (Not yet created VCP from the acode about).
+ cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "Prod_subnet"
+  }
+}
+
+
+
+
+
+
