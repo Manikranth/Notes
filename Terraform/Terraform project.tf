@@ -1,3 +1,14 @@
+#This project is to create 
+      #VCP 
+      #subnet
+      #Internet Gateway 
+      #Custom rought tables 
+      #security Groups for 22,80,443 
+      #network interface in the subnet 
+      #Ubintu server & install appache2 and 
+      #Associte subnet with the route table and Assigen the eclictic IP for thr network interface 
+
+
 provider "aws" {
   region  = "us-east-1"
   access_key = "AKIAIQALPXYK5CCNX2IA"
