@@ -17,6 +17,8 @@ Common commands:
 
                                         console            Interactive console for Terraform interpolations
                                         destroy            Destroy Terraform-managed infrastructure
+                                                           Traget -  will get the trageted resource destroy - terraform destroy -traget <resource destroy> 
+                                        
                                         env                Workspace management
                                         fmt                Rewrites config files to canonical format
                                         get                Download and install modules for the configuration
@@ -36,6 +38,8 @@ Common commands:
 
                                         providers          Prints a tree of the providers used in the configuration
                                         refresh            Update local state file against real resources
+                                                            #it showes terraform apply output without applying 
+                                        
                                         show               Inspect Terraform state or plan
                                         taint              Manually mark a resource for recreation
                                         untaint            Manually unmark a resource as tainted
@@ -49,7 +53,27 @@ Common commands:
                                         debug              Debug output management (experimental)
                                         force-unlock       Manually unlock the terraform state
                                         push               Obsolete command for Terraform Enterprise legacy (v1)
+                                        
                                         state              Advanced state management
+                                                            Subcommands:
+                                                              list                List resources in the state
+                                                              mv                  Move an item in the state
+                                                              pull                Pull current state and output to stdout
+                                                              push                Update remote state from a local state file
+                                                              replace-provider    Replace provider in the state
+                                                              rm                  Remove instances from the state
+                                                              show                Show a resource in the state
+
+
+Output
+-----------
+Will give you the desired traget that you sepcifi when you run the "terraform apply" or "terrafrom output" after the terraform apply. 
+
+output "<name>"{
+ value = <ressource name>.id
+}
+
+
 
 
 
