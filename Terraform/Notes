@@ -1,11 +1,25 @@
 It witten in the ashi corp conf lang with .tf extantion. it rewriten in the declarative mammer means - it do not run the run code but accutally check the cloud (where ever you are creating) and make sure it has all the instancres are persent. 
 
+Desired & Current States
+------------------------
+Desired States:
+The start of the resource menctioned in the code file(.tf)
+
+Current States:
+The stats of the current resource in the proveder or stats of the current resource in the .tfstate file (if it not in the sync with the proveder have to run the terraform plan/refresh)
+
+Wheat terraform try to do os that it will allways try to match Desired State with Current State:
+                          >> Desired State == Current State
+
+
 File system:
 ------------
 Terraform foulder:
+------------------
 Terraform foulder is created when you run the terrafrom init so that it download the plugins that are need for the "provider" menctioned in the code. 
 
 Terraform.tfstate:
+------------------
 Terraform creates a terrafrom.tfstate file to keep track for itself of what it created whenever terraform apply is run. it checks terraform.tfstate file to make sure what need to be added or changed. 
 Bassically it's way for the terraaform to what is that it created.
 
@@ -13,34 +27,37 @@ Bassically it's way for the terraaform to what is that it created.
 Common commands:
 
                                     (CLI- commends)
+                                        init               Initialize a Terraform working directory
+                                                           #Without running "init" terrafrom will not download the plugins to run the code.
+                                                           if you are ruuning the provider for the first time you need to run "terraform init"
+                                                           Error: Could not load plugin -Plugin reinitialization required. Please run "terraform init".
+                                                           
+                                        plan               Generate and show an execution plan
                                         apply              Builds or changes infrastructure
-
-                                        console            Interactive console for Terraform interpolations
                                         destroy            Destroy Terraform-managed infrastructure
-                                                           Traget -  will get the trageted resource destroy - terraform destroy -traget <resource destroy> 
+                                                           #Traget -  will get the trageted resource destroy 
+                                                           # >> terraform destroy -traget <total resource_name> 
                                         
+                                        refresh            Update local state file against real resources
+                                                           #it showes terraform apply output without applying 
+                                                            
+                                                            
+                                        console            Interactive console for Terraform interpolations
+                                        
+                                        show               Inspect Terraform state or plan
+                                         
                                         env                Workspace management
                                         fmt                Rewrites config files to canonical format
                                         get                Download and install modules for the configuration
                                         graph              Create a visual graph of Terraform resources
                                         import             Import existing infrastructure into Terraform
-
-                                        init               Initialize a Terraform working directory
-                                                           Without running "init" terrafrom will not download the plugins to run the code.
-                                                           if you are ruuning the provider for the first time you need to run "terraform init"
-                                                           Error: Could not load plugin -Plugin reinitialization required. Please run "terraform init".
-                                        
                                         login              Obtain and save credentials for a remote host
                                         logout             Remove locally-stored credentials for a remote host
                                         output             Read an output from a state file
-
-                                        plan               Generate and show an execution plan
-
                                         providers          Prints a tree of the providers used in the configuration
-                                        refresh            Update local state file against real resources
-                                                            #it showes terraform apply output without applying 
                                         
-                                        show               Inspect Terraform state or plan
+                                        
+                                       
                                         taint              Manually mark a resource for recreation
                                         untaint            Manually unmark a resource as tainted
                                         validate           Validates the Terraform files
@@ -93,6 +110,11 @@ Terraform is used to create, manage, and update infrastructure resources such as
 A provider is responsible for understanding API interactions and exposing resources. Most providers configure a specific infrastructure platform (either cloud or self-hosted). Providers can also offer local utilities for tasks like generating random numbers for unique resource names.
  - To work with the terraform we need to install the nessary plugins to communate with the Providers. 
  
+ These providers have different vsersion as well, if version argument is not specified, the most recent provder will be downloded duting the first "init". 
+ For production use - you should constrain the acceptable provider version, as a new version can brack the existing biuld. 
+                                                                  provider "aws" {
+                                                                        region  = "us-east-1"
+                                                                        version = "2.7"
 
                                             provider "aws" {
                                               region  = "us-east-1"
