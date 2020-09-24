@@ -25,7 +25,7 @@ Bassically it's way for the terraaform to what is that it created.
 
 
 Common commands:
-
+-----------------
                                     (CLI- commends)
                                         init               Initialize a Terraform working directory
                                                            #Without running "init" terrafrom will not download the plugins to run the code.
@@ -110,11 +110,26 @@ Terraform is used to create, manage, and update infrastructure resources such as
 A provider is responsible for understanding API interactions and exposing resources. Most providers configure a specific infrastructure platform (either cloud or self-hosted). Providers can also offer local utilities for tasks like generating random numbers for unique resource names.
  - To work with the terraform we need to install the nessary plugins to communate with the Providers. 
  
- These providers have different vsersion as well, if version argument is not specified, the most recent provder will be downloded duting the first "init". 
+                      CODE.TF   ---------------->   TERRAFORM   ---------------->   Providers   ----------------> SOURCE Providers 
+                                                                          This is the provider out side the 
+                                                                                  terraform that 
+                                                                                  get downloaded when 
+                                                                             run "init" for the forst time
+
+These providers have different vsersion as well, if version argument is not specified, the most recent provder will be downloded duting the first "init". 
  For production use - you should constrain the acceptable provider version, as a new version can brack the existing biuld. 
+                                                                  
+                                                                  
                                                                   provider "aws" {
                                                                         region  = "us-east-1"
                                                                         version = "2.7"
+                                                                            
+                                                                            How to set the vsersion for the provider
+                                                                                    -- >=1.0          
+                                                                                    -- <=1.0
+                                                                                    -- ~>2.0
+                                                                                    -- >=2.10, <=2.30
+                                                                        
 
                                             provider "aws" {
                                               region  = "us-east-1"
