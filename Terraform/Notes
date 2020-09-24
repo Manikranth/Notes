@@ -74,6 +74,15 @@ output "<name>"{
 }
 
 
+variable:
+---------
+Is used when give the input when you run the code, basscally it wil ask for the "enter value" and place that value in the menction place
+
+-see variabtle.tf for the code 
+        > ferraform apply -var "<terraform_resource name> = <Vallue>"
+        
+But in the workplace you don't use the either of this methods- terraform looks for the file called - "terraform.tfvars"
+                                                                                                        > <terraform_resource name> = "10.0.100.0/24"
 
 
 
@@ -133,6 +142,9 @@ resource "aws_subnet" "terraformsubnet" {
 
 
 
+
+Resource
+https://www.youtube.com/watch?v=SLB_c_ayRMo
 
 
 
