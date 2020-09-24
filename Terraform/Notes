@@ -110,7 +110,7 @@ Terraform is used to create, manage, and update infrastructure resources such as
 A provider is responsible for understanding API interactions and exposing resources. Most providers configure a specific infrastructure platform (either cloud or self-hosted). Providers can also offer local utilities for tasks like generating random numbers for unique resource names.
  - To work with the terraform we need to install the nessary plugins to communate with the Providers. 
  
-                      CODE.TF   ---------------->   TERRAFORM   ---------------->   Providers   ----------------> SOURCE Providers 
+                      CODE.TF   ---------------->   TERRAFORM   <---------------->   Providers   <----------------> SOURCE Providers 
                                                                           This is the provider out side the 
                                                                                   terraform that 
                                                                                   get downloaded when 
@@ -129,7 +129,9 @@ These providers have different vsersion as well, if version argument is not spec
                                                                                     -- <=1.0
                                                                                     -- ~>2.0
                                                                                     -- >=2.10, <=2.30
-                                                                        
+
+         
+
 
                                             provider "aws" {
                                               region  = "us-east-1"
@@ -157,6 +159,8 @@ These providers have different vsersion as well, if version argument is not spec
                                                }
                                              }
 
+Example:
+---------
 AWS_VPC
 --------
 
@@ -178,9 +182,35 @@ resource "aws_subnet" "terraformsubnet" {
 }
 
 
+There are two major categories for terraform providers:
+
+HashiCorp Distributed providers - can be downloaded automatically during terraform init.
+-------------------------------
+3rde pary Providers:
+---------------------
+            > terraform init cannot automatically download providers that are not distributed by HashiCorp
+            > It can happen that the official provider does not support specific functionality.
+            > Some organizations might have their proprietary platform for which they want to use Terraform.
+
+How to download the 3rde pary Providers:
+              > Third-party providers must be manually installed, since terraform init cannot automatically download them.
+              > Install third-party providers by placing their plugin executables in the user plugins directory.
+              
+           -----------------------------------------------------
+                OS         |         User Plugins Directory
+            -----------------------------------------------------  
+              WIndows      |      %APPDATA%\terraform.d\plugins
+              other        |         ~/.terraform.d/plugins
+            -----------------------------------------------------
+
+                > Download usimg wget
+                > created the Dir $ mkdir  ~/.terraform.d/plugins
+                > move the dowload file to the foulder  ~/.terraform.d/plugins
+                > run $ terrafrom inti
 
 
-Resource
+
+Resource:
 https://www.youtube.com/watch?v=SLB_c_ayRMo
 
 
