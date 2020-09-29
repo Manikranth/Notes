@@ -187,6 +187,13 @@ sudo -u cloudsvc /opt/fedex/cloud/pla*/current/bin/status_platform_service
 sudo /usr/sbin/alternatives --config java
 
 
+ubuntu@ip-172-31-52-90:~$ which mvn
+/usr/bin/mvn
+
+ubuntu@ip-172-31-52-90:~$ readlink -f /usr/bin/mvn
+/usr/share/maven/bin/mvn
+
+
 
 
 
