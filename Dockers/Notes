@@ -1,0 +1,103 @@
+landscape.cncf.io -  will give you the landscap on that need to be filled after leanrning dockers.
+
+
+Dockers
+--------
+
+Install Docker on an Amazon EC2 instance:
+-----------------------------------------
+sudo yum update -y
+
+sudo yum install docker
+
+sudo service docker start or /bin/systemctl start docker.service 
+
+sudo usermod -a -G docker ec2-user
+
+When you install dDocker in the linic you have to install the docker machine and Docker compose:
+Docker machine:
+----------------
+base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+  sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
+  chmod +x /usr/local/bin/docker-machine
+  
+ Docker Compose:
+----------------
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+To install a different version of Compose, substitute 1.27.4 with the version of Compose you want to use.
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+mv docker-compose /usr/bin/
+
+
+
+Images vs Container
+---------------------
+Image - is the dineary, liberyed and sorcecore that make up the application 
+Container -  is running indtance of that image 
+
+Management Commands:
+  builder     Manage builds
+  config      Manage Docker configs
+  container   Manage containers
+                run - create a new container - wehn it is run docker will look up in the local image chash first and it it did not find in the locally it will look in the docker hub.
+                ls  - list all container
+                stop - existing container
+                start - will start existing container
+                logs - show thw log of the specife conatiner 
+                rm  - will remover conatiner for conatiner list 
+                    Examples:
+  
+                      docker container run --publish 80:80 nginx
+                                            it create the container called nignx and pupliching that in the port 80 
+                      docker container run --publish -detach 80:80 nginx
+                                            -detach will run the container in background 
+                      docker container ls
+                      docker container stop 
+                      docker container ls -a 
+                            CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+                            fd36c5210c3e        nginx               "/docker-entrypoint.…"   3 minutes ago       Exited (0) 2 minutes ago                       eager_kirch
+                            2d1e7922788a        nginx               "/docker-entrypoint.…"   8 minutes ago       Exited (0) 5 minutes ago                       quizzical_ellis
+                                  
+                                  Docker willl create the name by itself if not given 
+                       
+                      docker container run --publish -detach 80:80 --name <xxx>  nginx
+                      docker container logs <conatiner_name>
+  
+  
+  
+  context     Manage contexts
+  engine      Manage the docker engine
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  ETC......
+  
+  
+  Docker commend formate - $ docker <Management commned> <commend>
+  
+  
+
+  
+  
