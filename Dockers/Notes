@@ -139,7 +139,21 @@ Commands:
   
   
   
-  
+      Docker network: DNS
+      -------------------
+      when you create the new network it cones with the DSN not like the bridge network. So it best to create the new network all the time. reather then usling the "--link" in the bridge network
 
+  
+  
+  
+  Docker Images:
+  --------------
+  Image - is the dineary, liberyed and sorcecore that make up the application. conatine of metadata about the image date and how to run the image.
+         - It not a complate os where there is no Kernal or drivers. 
+     
+  
+  
+  
+  
   
   
