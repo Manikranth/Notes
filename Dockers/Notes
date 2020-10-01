@@ -41,20 +41,28 @@ Container -  is running indtance of that image
 Management Commands:
   builder     Manage builds
   config      Manage Docker configs
+  
   container   Manage containers
+  -------------------------------             
                 run - create a new container - wehn it is run docker will look up in the local image chash first and it it did not find in the locally it will look in the docker hub.
                 ls  - list all container
                 stop - existing container
                 start - will start existing container
                 logs - show thw log of the specife conatiner 
                 rm  - will remover conatiner for conatiner list 
-                    Examples:
+                
+                Top - Process list in the container 
+                inspect - details of one container
+                stats - give the stats (performnce) of all the containers
+                
+                
+                Examples:
   
                       docker container run --publish 80:80 nginx
                                             it create the container called nignx and pupliching that in the port 80 
                       docker container run --publish -detach 80:80 nginx
-                                            -detach will run the container in background 
-                      docker container ls
+                                            -detach (-d) will run the container in background 
+                      docker container ls / docker ps
                       docker container stop 
                       docker container ls -a 
                             CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
@@ -65,8 +73,13 @@ Management Commands:
                        
                       docker container run --publish -detach 80:80 --name <xxx>  nginx
                       docker container logs <conatiner_name>
-  
-  
+                    
+               doker container run -it (i-intervactive - to keep the section open and t - tty same ssh) -  opens the shell inside that new conatiner 
+               doker container exec -it - to run the secound process in the existing container
+                
+                
+                
+                
   
   context     Manage contexts
   engine      Manage the docker engine
@@ -96,6 +109,35 @@ Commands:
   
   
   Docker commend formate - $ docker <Management commned> <commend>
+  
+  
+  
+  Docker network
+  ---------------
+  When you createing the container you basssically connecting to the docker default newtork called "bridge". Thought the NAT firewell (bacealy - docker demon configraing the host IP so that you container can go into the neetwork and back)
+  
+  
+                          NETWORK ID          NAME                DRIVER              SCOPE
+                          -----------         -----               -------             -----
+                          a6d69e38cdd7        bridge              bridge              local  - is the defalt docker network 
+                          19257922996c        host                host                local  - a network that skips the viutal networking of docker and connect the container to the host meachian - it will have the sevurity issue but will have hight through put
+                          736a1f5ef0ce        none                null                local  - Have the insterface on you local mechain 
+
+  
+      Network CLI:
+      ------------
+            docker network ls
+            docker network inspect <network_name>
+            docker network create --driver 
+            docker network connect <network> <container>
+            docker network disconnect
+            
+            docker container -p (expose the post to the network)
+            docker container port - list the post of the container 
+            docker container -d --name <name> --network <network_name>
+            docker container port
+  
+  
   
   
 
