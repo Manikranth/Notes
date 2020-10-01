@@ -194,7 +194,7 @@ ubuntu@ip-172-31-52-90:~$ readlink -f /usr/bin/mvn
 /usr/share/maven/bin/mvn
 
 
-
+For any command to run from any where that file should be in /usr/bin
 
 
 
