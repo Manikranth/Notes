@@ -178,6 +178,8 @@ rpm -qa | grep <s/w name>	     		##[to find the available software]
 sudo mco ping -I <server_name>
 sudo su - fdx_3748658						  ## [switch user]
 ps –ef | grep 	          				     	##    [running servers]
+	root@05a4de56ba5c:/# apt-get install procps
+	
 sudo /etc/init.d/clo ud-elmo stop		     ##	 [stop elmo services]
 sudo –u <User> <command> 				##  [use command as the user]
 
