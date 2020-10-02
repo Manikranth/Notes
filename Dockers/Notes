@@ -285,6 +285,8 @@ When you stop/start file is the container will not go away, only when you remove
 
             Volume has to mamually deleted. 
             
+            Volume stored in the local host - cd /var/lib/docker/volumes/
+                                              -----------------------------
             CLI:
             ----
             create      Create a volume
@@ -300,6 +302,147 @@ When you stop/start file is the container will not go away, only when you remove
         --------------
         Is mointing the host dir. or file into a conatiner. i will be like the conatiner file storage to the container.
         
+        
+        $ docker container run -p 80:80 -d -name ng -d -v <pathe>:<main_dir> nginx 
+                      but doing do you get synce the host file system with the container main dir.
+                      
+ 
+ 
+ 
+ 
+ Docker Compose:
+ --------------- 
+ is writen in the YMAL.
+ 
+ 
+                  Example:
+                  --------
+                  version: '2'
+
+                    # same as
+                    # docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+
+                    services:
+                      jekyll:
+                        image: jekyll/jekyll
+                        
+                        volumes:
+                          - .:/site
+                        
+                        ports:
+                          - '80:4000'
+                                                                    YMAL:
+                                                                    ------
+                                                                          version: '3.1'  # if no version is specificed then v1 is assumed. Recommend v2 minimum
+
+                                                                                    services:  # containers. same as docker run
+                                                                                          servicename: # a friendly name. this is also DNS name inside network
+                                                                                                    image: # Optional if you use build:
+                                                                                                    command: # Optional, replace the default CMD specified by the image
+                                                                                                    environment: # Optional, same as -e in docker run
+                                                                                                    volumes: # Optional, same as -v in docker run
+                                                                                           servicename2:
+
+                                                                                    volumes: # Optional, same as docker volume create
+
+                                                                                    networks: # Optional, same as docker network create
+
+
+                $ docker-compose up
+                $ docker-compose done 
+                
+                CLI:
+                ----
+                
+                build              Build or rebuild services
+                config             Validate and view the Compose file
+                create             Create services
+                down               Stop and remove containers, networks, images, and volumes
+                events             Receive real time events from containers
+                exec               Execute a command in a running container
+                help               Get help on a command
+                images             List images
+                kill               Kill containers
+                logs               View output from containers
+                pause              Pause services
+                port               Print the public port for a port binding
+                ps                 List containers
+                pull               Pull service images
+                push               Push service images
+                restart            Restart services
+                rm                 Remove stopped containers
+                run                Run a one-off command
+                scale              Set number of containers for a service
+                start              Start services
+                stop               Stop services
+                top                Display the running processes
+                unpause            Unpause services
+                up                 Create and start containers
+                version            Show version information and quit
 
 
 
+Docker Swarm:
+--------------
+Server cluster solution that bring togather diff OS into one managaable unit then you can orchestrat.
+
+Docker doesn't anable the docker swarm
+      docker info
+      docker swarm init  # to activeate
+
+  *** Even when you delete a container swarm will craete that misiing right was - it a part of the container orch.
+
+          CLI:
+          ----
+          ca          Display and rotate the root CA
+          init        Initialize a swarm
+          join        Join a swarm as a node and/or manager
+          join-token  Manage join tokens
+          leave       Leave the swarm
+          unlock      Unlock swarm
+          unlock-key  Manage the unlock key
+          update      Update the swarm
+
+
+    Docker node:   (can only run by the master)
+    -----------
+          CLI:
+          ----
+          demote      Demote one or more nodes from manager in the swarm
+          inspect     Display detailed information on one or more nodes
+          ls          List nodes in the swarm
+          promote     Promote one or more nodes to manager in the swarm
+          ps          List tasks running on one or more nodes, defaults to current node
+          rm          Remove one or more nodes from the swarm
+          update      Update a node
+
+     
+     Docker service:
+     ---------------
+          CLI:
+          ----
+          create      Create a new service
+          inspect     Display detailed information on one or more services
+          logs        Fetch the logs of a service or task
+          ls          List services
+          ps          List the tasks of one or more services
+          rm          Remove one or more services
+          rollback    Revert changes to a service's configuration
+          scale       Scale one or multiple replicated services
+          update      Update a service
+ 
+          # docker service create alpine ping 8.8.8.8
+          # docker service ls
+          # docker service update b6358fvmqs0b --replicas 3
+          
+          
+          
+          
+       Routing Mesh: (basically it leastin on all the nodes rought the trafice to the right container)
+       -------------
+       is a routes ingresss (incoming) packats for a services to proprt Task
+       Spans all nodes in swarm 
+       load blances swarm serverices across thier tasks
+       Container-to-container ina Overlay network (users VIP)
+       
+       
