@@ -1,0 +1,116 @@
+Using Docker with Pipeline 
+Table of Contents
+Customizing the execution environment
+Caching data for containers
+Using multiple containers
+Using a Dockerfile
+Specifying a Docker Label
+Advanced Usage with Scripted Pipeline
+Running "sidecar" containers
+Building containers
+Using a remote Docker server
+Using a custom registry
+Many organizations use Docker to unify their build and test environments across machines, and to provide an efficient mechanism for deploying applications. Starting with Pipeline versions 2.5 and higher, Pipeline has built-in support for interacting with Docker from within a Jenkinsfile.
+
+While this section will cover the basics of utilizing Docker from within a Jenkinsfile, it will not cover the fundamentals of Docker, which can be read about in the Docker Getting Started Guide.
+
+Customizing the execution environment
+Pipeline is designed to easily use Docker images as the execution environment for a single Stage or the entire Pipeline. Meaning that a user can define the tools required for their Pipeline, without having to manually configure agents. Practically any tool which can be packaged in a Docker container. can be used with ease by making only minor edits to a Jenkinsfile.
+
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent {
+        docker { image 'node:14-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+Toggle Scripted Pipeline (Advanced)
+When the Pipeline executes, Jenkins will automatically start the specified container and execute the defined steps within it:
+
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
+[guided-tour] Running shell script
++ node --version
+v14.5.0
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Caching data for containers
+Many build tools will download external dependencies and cache them locally for future re-use. Since containers are initially created with "clean" file systems, this can result in slower Pipelines, as they may not take advantage of on-disk caches between subsequent Pipeline runs.
+
+Pipeline supports adding custom arguments which are passed to Docker, allowing users to specify custom Docker Volumes to mount, which can be used for caching data on the agent between Pipeline runs. The following example will cache ~/.m2 between Pipeline runs utilizing the maven container, thereby avoiding the need to re-download dependencies for subsequent runs of the Pipeline.
+
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B'
+            }
+        }
+    }
+}
+Toggle Scripted Pipeline (Advanced)
+Using multiple containers
+It has become increasingly common for code bases to rely on multiple, different, technologies. For example, a repository might have both a Java-based back-end API implementation and a JavaScript-based front-end implementation. Combining Docker and Pipeline allows a Jenkinsfile to use multiple types of technologies by combining the agent {} directive, with different stages.
+
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent none
+    stages {
+        stage('Back-end') {
+            agent {
+                docker { image 'maven:3-alpine' }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        stage('Front-end') {
+            agent {
+                docker { image 'node:14-alpine' }
+            }
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+Toggle Scripted Pipeline (Advanced)
+Using a Dockerfile
+For projects which require a more customized execution environment, Pipeline also supports building and running a container from a Dockerfile in the source repository. In contrast to the previous approach of using an "off-the-shelf" container, using the agent { dockerfile true } syntax will build a new image from a Dockerfile rather than pulling one from Docker Hub.
+
+Re-using an example from above, with a more custom Dockerfile:
+
+Dockerfile
+FROM node:14-alpine
+
+RUN apk add -U subversion
+By committing this to the root of the source repository, the Jenkinsfile can be changed to build a container based on this Dockerfile and then run the defined steps using that container:
+
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent { dockerfile true }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+                sh 'svn --version'
+            }
+        }
+    }
+}
+The agent { dockerfile true } syntax supports a number of other options which are described in more detail in the Pipeline Syntax section.
