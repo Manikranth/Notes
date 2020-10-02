@@ -112,7 +112,7 @@ Commands:
   
   
   
-  Docker network
+  Docker network **
   ---------------
   When you createing the container you basssically connecting to the docker default newtork called "bridge". Thought the NAT firewell (bacealy - docker demon configraing the host IP so that you container can go into the neetwork and back)
   
@@ -149,11 +149,157 @@ Commands:
   Docker Images:
   --------------
   Image - is the dineary, liberyed and sorcecore that make up the application. conatine of metadata about the image date and how to run the image.
-         - It not a complate os where there is no Kernal or drivers. 
+         - It not a complate OS where there is no Kernal or drivers, karnal is provided by the host.   
      
+       Example:
+       --------
+        "TAG's" are the version. A single image ID can have the miltiply tags.
+        
+        $ docker image pull <image_name>
+        $ docker image push <image_name>
+        $ docker image ls
+        
+        REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+        ----------          ----                --------            -------             ----
+        ubuntu              latest              9140108b62dc        5 days ago          72.9MB
+        httpd               latest              417af7dc28bc        2 weeks ago         138MB
+        nginx               latest              7e4d58f0e5f3        3 weeks ago         133MB
+        mysql               latest              e1d7dc9731da        3 weeks ago         544MB
+        centos              latest              0d120b6ccaa8        7 weeks ago         215MB
+        alpine              latest              a24bb4013296        4 months ago        5.57MB
+        elasticsearch       2                   5e9d896dc62c        2 years ago         479MB
+ 
+        CLI:
+        ---
+              
+                build       Build an image from a Dockerfile
+                history     Show the history of an image
+                import      Import the contents from a tarball to create a filesystem image
+                inspect     Display detailed information on one or more images
+                load        Load an image from a tar archive or STDIN
+                ls          List images
+                prune       Remove unused images
+                pull        Pull an image or a repository from a registry
+                push        Push an image or a repository to a registry
+                rm          Remove one or more images
+                save        Save one or more images to a tar archive (streamed to STDOUT by default)
+                tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+
+      Image Layer:
+      ------------
+      Images are created as union filw system where layer are added on top of the layres.
+      Are the layers are the upate and changes done on the old image file.
+      
+      Even the container are just the read/write layer on the image. when you change the a file in the conatiner are stored in the container not in the image. 
+          
+          CLI:
+          ----
+          docker hisyory <docekr_image_name>
+          docker image inspect <docekr_image_name>
+          
+          
+       Image Tagging:
+       --------------
+       Tagging are the version of the image.
+       image are idifited with the REPOSITORY and TAG's
+                  docker image tag <eixting_image_REPOSITORY> <New_REPOSITORY_name>
+                  docker image tag <eixting_image_REPOSITORY> <New_REPOSITORY_name>:<tag>
+           
   
   
-  
-  
-  
-  
+DOCKERFILE's 
+------------
+Dockerfile is IAC of the docker.
+
+CLI:
+----
+docker image build -t <tag_name> <Location>
+
+After the you change anything in the Dockerfile and rerun the docker image build - i will use the cash data and run eveting after the edited line.
+So its always better to keep the most unchanged data at the diggining of the code.
+
+              Example:
+              -------
+              FROM debian:stretch-slim
+              # all images must have a FROM
+              # usually from a minimal Linux distribution like debian or (even better) alpine
+              # if you truly want to start with an empty container, use FROM scratch
+
+              ENV NGINX_VERSION 1.13.6-1~stretch
+              ENV NJS_VERSION   1.13.6.0.1.14-1~stretch
+              # optional environment variable that's used in later lines and set as envvar when container is running
+
+              RUN apt-get update \
+                      && apt-get install --no-install-recommends --no-install-suggests -y gnupg1 \
+                      && \
+                      NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
+                      found=''; \
+                      for server in \
+                              ha.pool.sks-keyservers.net \
+                              hkp://keyserver.ubuntu.com:80 \
+                              hkp://p80.pool.sks-keyservers.net:80 \
+                              pgp.mit.edu \
+                      ; do \
+                              echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
+                              apt-key adv --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
+                      done; \
+                      test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
+                      apt-get remove --purge -y gnupg1 && apt-get -y --purge autoremove && rm -rf /var/lib/apt/lists/* \
+                      && echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" >> /etc/apt/sources.list \
+                      && apt-get update \
+                      && apt-get install --no-install-recommends --no-install-suggests -y \
+                                                              nginx=${NGINX_VERSION} \
+                                                              nginx-module-xslt=${NGINX_VERSION} \
+                                                              nginx-module-geoip=${NGINX_VERSION} \
+                                                              nginx-module-image-filter=${NGINX_VERSION} \
+                                                              nginx-module-njs=${NJS_VERSION} \
+                                                              gettext-base \
+                      && rm -rf /var/lib/apt/lists/*
+              # optional commands to run at shell inside container at build time
+              # this one adds package repo for nginx from nginx.org and installs it
+
+              RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+                      && ln -sf /dev/stderr /var/log/nginx/error.log
+              # forward request and error logs to docker log collector
+
+              EXPOSE 80 443
+              # expose these ports on the docker virtual network
+              # you still need to use -p or -P to open/forward these ports on host
+
+              CMD ["nginx", "-g", "daemon off;"]
+
+Container life time:
+--------------------
+Containerzation are immutable infrasturucture - you do not change the existing running container. if you do need to change/update the conatiner - you just run a new container  
+
+When you stop/start file is the container will not go away, only when you remove the conatiner the UFS (union file storage) will go away.
+
+
+        Data Volumes:
+        --------------
+        Are the conf option that will create the spical location outside it's UFS. And attctch what ever container we want. 
+
+                  Dockerfile
+                     VOLUME /var/lib/mysql - when you run this docker file or pull the image with volume perameter - It create a new volume loacation and assigen to this location. and the file that are save in this path will out live the container. untill the volume is deleteed. 
+
+            Volume has to mamually deleted. 
+            
+            CLI:
+            ----
+            create      Create a volume
+            inspect     Display detailed information on one or more volumes
+            ls          List volumes
+            prune       Remove all unused local volumes
+            rm          Remove one or more volumes
+              
+              -v flage the for thr volune is to nmae the volume when using the docker run
+          
+        
+        Bind Mounting:
+        --------------
+        Is mointing the host dir. or file into a conatiner. i will be like the conatiner file storage to the container.
+        
+
+
+
