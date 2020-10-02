@@ -444,5 +444,59 @@ Docker doesn't anable the docker swarm
        Spans all nodes in swarm 
        load blances swarm serverices across thier tasks
        Container-to-container ina Overlay network (users VIP)
+       it a stateless the load blancing 
+       
+       
+       
+       Stacks:
+       -------
+       it composed file for the production swarm. Stacks accept cpmmose file as thier declarative defination fpr services, networks and volumes
+       
+       Stack is like a conposed file (version 3 or higher) for dockers swarm 
+       
+       docker stack deploy
+       
+                         CLI:
+                         ----
+                          deploy      Deploy a new stack or update an existing stack
+                          ls          List stacks
+                          ps          List the tasks in the stack
+                          rm          Remove one or more stacks
+                          services    List the services in the stack
+
+       TIP:
+       visualizer - give you clean GUI of the stack and services running in the all the nodes.
+       
+       Secrets storage:
+       ----------------
+        Is the Secrets storage that you can save sring or binery up 500kb. 
+        Secrets are stored in the swarm, then assigen it to the srivices
+        They look like the file in the conatiner but are actally in-memory file system
+        /rum/Secrets/<Secrets_name> or
+        /rum/Secrets/<Secrets_alias>
+       
+       
+                 CLI:
+                 ----
+                create      Create a secret from a file or STDIN as content
+                inspect     Display detailed information on one or more secrets
+                ls          List secrets
+                rm          Remove one or more secrets
+
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
        
        
