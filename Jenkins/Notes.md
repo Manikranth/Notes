@@ -2,7 +2,9 @@
 Jenkins (CI tool)
 ------------------------------------------------------------------------------------
  
-<img src=”Images/image.jpg” width=”100">
+![](Image/image.JPG)
+
+<img src="Images/image.jpg” >
 
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
