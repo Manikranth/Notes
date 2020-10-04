@@ -13,7 +13,8 @@ The start of the resource menctioned in the code file(.tf)
 The stats of the current resource in the proveder or stats of the current resource in the .tfstate file (if it not in the sync with the proveder have to run the terraform plan/refresh)
 
 Wheat terraform try to do os that it will allways try to match Desired State with Current State:
-                          >> Desired State == Current State
+                          
+                          `Desired State == Current State`
 
 
 ### File system:
@@ -92,7 +93,7 @@ Bassically it's way for the terraaform to what is that it created.
 -----------
 Will give you the desired traget that you sepcifi when you run the "terraform apply" or "terrafrom output" after the terraform apply. 
 
-```
+```HCL
 output "<name>"{
  value = <ressource name>.id
 }
@@ -106,7 +107,7 @@ output "<name>"{
 Is used when give the input when you run the code, basscally it wil ask for the "enter value" and place that value in the menction place
 
 -see variabtle.tf for the code 
-```        
+```HCL        
         > ferraform apply -var "<terraform_resource name> = <Vallue>"
 ````
 
@@ -137,18 +138,18 @@ These providers have different vsersion as well, if version argument is not spec
                                                                   
 
 **Formate**
-```
+```HCL
 # resource "<provider>_<resource_type>" "name" {
            #    config options......
            #}
 ```
 
-```                                                                  
+```HCL                                                                  
       provider "aws" {
            region  = "us-east-1"
            version = "2.7"
                                                                             
-     How to set the vsersion for the provider
+     # How to set the vsersion for the provider
             -- >=1.0          
             -- <=1.0
             -- ~>2.0
@@ -158,7 +159,8 @@ These providers have different vsersion as well, if version argument is not spec
 
 
 **Exapmle:**
-```
+
+```HCL
 
        provider "aws" {
            region  = "us-east-1"
@@ -187,7 +189,7 @@ These providers have different vsersion as well, if version argument is not spec
 **Example:2**
 
 **AWS_VPC**
-```
+```HCL
 
       resource "aws_vpc" "terraformvcp" {
         cidr_block = "10.0.0.0/16"  # ip addr from the VPC
