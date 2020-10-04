@@ -31,11 +31,11 @@ sudo usermod -a -G docker ec2-user
 **Docker Compose:**
 ```shell
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    To install a different version of Compose, substitute 1.27.4 with the version of Compose you want to use.
+    #To install a different version of Compose, substitute 1.27.4 with the version of Compose you want to use.
 
-    sudo chmod +x /usr/local/bin/docker-compose
+ sudo chmod +x /usr/local/bin/docker-compose
 
-    mv docker-compose /usr/bin/
+ mv docker-compose /usr/bin/
 ```
 
 
@@ -99,11 +99,12 @@ Images vs Container
     $ docker <Management commned> <commend>
 
 **Examples:**
-  
+
+```shell
     docker container run --publish 80:80 nginx
-                                            it create the container called nignx and pupliching that in the port 80 
+                                            # it create the container called nignx and pupliching that in the port 80 
     docker container run --publish -detach 80:80 nginx
-                                            -detach (-d) will run the container in background 
+                                            # -detach (-d) will run the container in background 
     docker container ls / docker ps
     docker container stop 
     docker container ls -a 
@@ -111,15 +112,15 @@ Images vs Container
             fd36c5210c3e        nginx               "/docker-entrypoint.…"   3 minutes ago       Exited (0) 2 minutes ago                       eager_kirch
             2d1e7922788a        nginx               "/docker-entrypoint.…"   8 minutes ago       Exited (0) 5 minutes ago                       quizzical_ellis
                                   
-                  Docker willl create the name by itself if not given 
+                  # Docker willl create the name by itself if not given 
                        
      docker container run --publish -detach 80:80 --name <xxx>  nginx
      docker container logs <conatiner_name>
                     
-     doker container run -it (i-intervactive - to keep the section open and t - tty same ssh) -  opens the shell inside that new conatiner 
-     doker container exec -it - to run the secound process in the existing container
+     doker container run -it    # (i-intervactive - to keep the section open and t - tty same ssh) -  opens the shell inside that new conatiner 
+     doker container exec -it   #  - to run the secound process in the existing container
                 
-                
+```                
                 
                 
   
