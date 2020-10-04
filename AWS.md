@@ -30,8 +30,10 @@ Result will have a folder
 ```
 You can free that space by running the following command
 
+```
 > /var/mail/username
 Note that greater than (>) symbol is not a prompt, you have to run the cmd with it.
+```
 
 Now check you space free space by
 ```
