@@ -127,11 +127,8 @@ A provider is responsible for understanding API interactions and exposing resour
       CODE.TF   ---------------->   TERRAFORM   <---------------->   Providers   <----------------> SOURCE Providers 
                                                       
                                                       This is the provider out side the 
-                                                                
-                                                                terraform that 
-                                                             
+                                                               terraform that 
                                                              get downloaded when 
-                                                        
                                                         run "init" for the forst time
 
 ```
