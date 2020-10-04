@@ -18,7 +18,7 @@ sudo usermod -a -G docker ec2-user
 **When you install Docker in the linic you have to install the docker machine and Docker composs:**
 
 **Docker machine:**
-```
+```shell
     base=https://github.com/docker/machine/releases/download/v0.16.0 &&
       curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
       sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
@@ -29,7 +29,7 @@ sudo usermod -a -G docker ec2-user
 
 
 **Docker Compose:**
-```
+```shell
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     To install a different version of Compose, substitute 1.27.4 with the version of Compose you want to use.
 
@@ -243,7 +243,7 @@ So its always better to keep the most unchanged data at the diggining of the cod
 **Example:**
 
 Sample Dockerfile -
-              
+```Dockerfile              
               FROM debian:stretch-slim
               # all images must have a FROM
               # usually from a minimal Linux distribution like debian or (even better) alpine
@@ -297,6 +297,7 @@ Sample Dockerfile -
               CMD ["nginx", "-g", "daemon off;"]
 
 
+```
 
 Container life time:
 --------------------
@@ -337,9 +338,9 @@ Volume stored in the local host - cd /var/lib/docker/volumes/
 
 Is mointing the host dir. or file into a conatiner. i will be like the conatiner file storage to the container.
         
-```        
+```shell        
         $ docker container run -p 80:80 -d -name ng -d -v <pathe>:<main_dir> nginx 
-                      but doing do you get synce the host file system with the container main dir.
+                      # but doing do you get synce the host file system with the container main dir.
 ```                      
  
  
@@ -352,6 +353,7 @@ Is mointing the host dir. or file into a conatiner. i will be like the conatiner
  
 **Example:**
 
+```yaml
     version: '2'
 
       # same as
@@ -383,10 +385,12 @@ Is mointing the host dir. or file into a conatiner. i will be like the conatiner
                                                             networks: # Optional, same as docker network create
 
 
+```
 
 The main docker-compose connends:
-$ docker-compose up 
-$ docker-compose done 
+
+        $ docker-compose up 
+        $ docker-compose done 
                 
 **CLI:**
 
