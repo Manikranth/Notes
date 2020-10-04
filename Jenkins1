@@ -1,7 +1,7 @@
 Jenkins (CI tool)
 ------------------------------------------------------------------------------------
  
-
+<img src=”Images/image.jpg” width=”100">
 
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
@@ -16,3 +16,7 @@ To change the admin password
           - Change <useSecurity>true</useSecurity> to false
           - Restart Jenkins: sudo service jenkins restart
  
+
+Pipeline as code:
+DSL - Domain specfife langiuage 
+
