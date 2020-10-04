@@ -136,6 +136,7 @@ Images vs Container
   
   ```
 $  docker image ls
+    
     NETWORK ID          NAME                DRIVER              SCOPE
     -----------         -----               -------             -----
     a6d69e38cdd7        bridge              bridge              local  - is the defalt docker network 
@@ -351,35 +352,35 @@ Is mointing the host dir. or file into a conatiner. i will be like the conatiner
  
 **Example:**
 
-                  version: '2'
+    version: '2'
 
-                    # same as
-                    # docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+      # same as
+      # docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
 
-                    services:
-                      jekyll:
-                        image: jekyll/jekyll
+        services:
+           jekyll:
+               image: jekyll/jekyll
                         
-                        volumes:
-                          - .:/site
+                 volumes:
+                   - .:/site
                         
-                        ports:
-                          - '80:4000'
-                                                                    YMAL:
-                                                                    ------
-                                                                          version: '3.1'  # if no version is specificed then v1 is assumed. Recommend v2 minimum
+                  ports:
+                    - '80:4000'
+                                          YMAL:
+                                          ------
+                                          version: '3.1'  # if no version is specificed then v1 is assumed. Recommend v2 minimum
 
-                                                                                    services:  # containers. same as docker run
-                                                                                          servicename: # a friendly name. this is also DNS name inside network
-                                                                                                    image: # Optional if you use build:
-                                                                                                    command: # Optional, replace the default CMD specified by the image
-                                                                                                    environment: # Optional, same as -e in docker run
-                                                                                                    volumes: # Optional, same as -v in docker run
-                                                                                           servicename2:
+                                          services:  # containers. same as docker run
+                                                   servicename: # a friendly name. this is also DNS name inside network
+                                                            image: # Optional if you use build:
+                                                            command: # Optional, replace the default CMD specified by the image
+                                                            environment: # Optional, same as -e in docker run
+                                                            volumes: # Optional, same as -v in docker run
+                                                    servicename2:
 
-                                                                                    volumes: # Optional, same as docker volume create
+                                                            volumes: # Optional, same as docker volume create
 
-                                                                                    networks: # Optional, same as docker network create
+                                                            networks: # Optional, same as docker network create
 
 
 
