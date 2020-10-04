@@ -12,9 +12,11 @@ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key           
 yum install jenkins
   
  /etc/systemcingig/jenkins     ## change the poort number
-
+ 
 To change the admin password 
  /var/lib/jenkins/config.xml
           - Change <useSecurity>true</useSecurity> to false
           - Restart Jenkins: sudo service jenkins restart
  
+This is a test
+**hi yjsdfge**
