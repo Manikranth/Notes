@@ -107,6 +107,7 @@ Create Ec2 - ports are open on your new EC2 instance:
 
 Puppet commends: 
 ----------------
+```
 puppet help resource Or puppet resource --help  		## list all actions
 puppet resource --types 					## list all resource type 
 
@@ -124,19 +125,16 @@ To automate the process the process we can use the "autosign.conf":
 		<full hostname>
 		<*.company.com>
 		after the modifing the autosign.conf do not for get to restart the puppet server - systemctl restart puppet
-
+```
 
 
 Paths:
 --------
+```
 /var/lib/puppet/ssl/						## All cert related 
 /etc/puppetlabs/puppet/ssl/ca/signed				## Signed cert 
 /ect/puppetlabs/puppet/puppet.conf				## puppet .conf file
-
 /var/log/ 							## Logs
-
-
-
 cat /etc/passwd							## store the used login detailed 
 cd var/fedex/cloud/ip/logs/					[ip logs]
 cd /var/fedex/mkacct/includes/                      		[To puchtocluster]
@@ -149,7 +147,7 @@ cd /opt/fedex/cloud/elmo/current/bin/
 grep c0011026 /var/fedex/cloud/placement/logs/application*log   [to see that SID and PID of the host that even de’comed]
 
 
-
+```
 
 Trouble shooting:
 -----------------
