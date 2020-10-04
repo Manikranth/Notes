@@ -14,7 +14,9 @@ sudo service docker start or /bin/systemctl start docker.service
 
 sudo usermod -a -G docker ec2-user
 
-When you install dDocker in the linic you have to install the docker machine and Docker compose:
+When you install Docker in the linux you have to install the docker machine and Docker compose
+
+
 Docker machine:
 ----------------
 base=https://github.com/docker/machine/releases/download/v0.16.0 &&
@@ -114,7 +116,7 @@ Commands:
   
   Docker network **
   ---------------
-  When you createing the container you basssically connecting to the docker default newtork called "bridge". Thought the NAT firewell (bacealy - docker demon configraing the host IP so that you container can go into the neetwork and back)
+  When you createing the container you basssically connecting to the docker default newtork called **bridge**. Thought the NAT firewell (bacealy - docker demon configraing the host IP so that you container can go into the neetwork and back)
   
   
                           NETWORK ID          NAME                DRIVER              SCOPE
