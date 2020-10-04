@@ -1,16 +1,23 @@
 PUPPET
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Puppet users 'facts' as the first step of the puppet to gather inventory date from the agent to masters with key value pairs called "Facts"
--- Fact contain - ip adderss, hostnames, kornal version  and use the info to compalil 'catalog'
--- Catalog - is a drift d/w the expected configration and current version and send back to the agent 
--- After the rtesiving the catalog from the puppet master, puppet agent will act on the changes imedetally by applying the new configration 
+
+**Fact contain** - ip adderss, hostnames, kornal version  and use the info to compalil 'catalog'
+
+**Catalog** - is a drift d/w the expected configration and current version and send back to the agent 
+
+After the rtesiving the catalog from the puppet master, puppet agent will act on the changes imedetally by applying the new configration 
+
 
 Pupet Building Blocks:
 ----------------------
-Resources - are the inbuilt funations that run in the back end to perfrom underlying operations in puppet. - file resources type (services rt to manages servicess and user rt ti manage users)
-Class - multy samll operation working for the single goel.
-Manifest - Directory containing puppet DSL files with ".pp (puppet program)" extenction. Puppet program contaion of defination/declareation of puppet class. 
-Modules - are the collection of files and directorys sudn has - manifest, cless defination. There are the shearable and reuseable like - mySQL , junkies module to manage jankies 
+**Resources** - are the inbuilt funations that run in the back end to perfrom underlying operations in puppet. - file resources type (services rt to manages servicess and user rt ti manage users)
+
+**Class** - multy samll operation working for the single goel.
+
+**Manifest** - Directory containing puppet DSL files with ".pp (puppet program)" extenction. Puppet program contaion of defination/declareation of puppet class. 
+
+**Modules** - are the collection of files and directorys sudn has - manifest, cless defination. There are the shearable and reuseable like - mySQL , junkies module to manage jankies 
 
 					Example - 
 					----------	  
@@ -142,61 +149,4 @@ grep c0011026 /var/fedex/cloud/placement/logs/application*log [to see that SID a
 Trouble shooting:
 -----------------
 if there is already cert in the ssl foulder -" Remove the old cert form the /etc/puppetlabs/puppet/ssl/certs and the run the pupprt agent -t"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Linux:
-----------
-id [show user’s group]
-sudo –l [list the sudo permissions]
-df –h
-grep --color=always  <word>
-grep --after-context=5 --before-context=10 <word> <file>
-shutdown -r now
-chmod +x ~/myscript.sh                              
-sudo chown <userID> -R <folder>    ## [change the owner of the folder]
-sudo chgrp <userID> -R <folder>     ## [change the group of the folder]
-sudo chmod -R 0777 <file/folder>        ##  [To Give total permission]
-
-cat mytext.txt > newfile.txt       ## copy the out put of the cat commend to the file
-cat mytext.txt >> another-text-file.txt    ## Append/Add text to the file 
-
-
-
-rpm -qa | grep <s/w name>	     		##[to find the available software]
-sudo mco ping -I <server_name>
-sudo su - fdx_3748658						  ## [switch user]
-ps –ef | grep 	          				     	##    [running servers]
-	root@05a4de56ba5c:/# apt-get install procps
-	
-sudo /etc/init.d/clo ud-elmo stop		     ##	 [stop elmo services]
-sudo –u <User> <command> 				##  [use command as the user]
-
-ps –fu cloudsvc
-sudo -u cloudsvc /opt/fedex/cloud/pla*/current/bin/status_platform_service
-
-sudo /usr/sbin/alternatives --config java
-
-
-ubuntu@ip-172-31-52-90:~$ which mvn
-/usr/bin/mvn
-
-ubuntu@ip-172-31-52-90:~$ readlink -f /usr/bin/mvn
-/usr/share/maven/bin/mvn
-
-
-For any command to run from any where that file should be in /usr/bin
-
-
 
