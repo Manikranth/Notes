@@ -95,7 +95,28 @@ Will give you the desired traget that you sepcifi when you run the "terraform ap
 
 ```HCL
 output "<name>"{
- value = <ressource name>.id
+ value = <ressource name>.<attribites>  # If you do not specife the attribites it will give all the attribites of the ressource
+}
+```
+Attribites mean the attribites of the ressource we are calling. like: 
+```
+association_id 
+domain 
+id 
+instance_id
+network_interface_id 
+
+ETC..
+```
+
+An outputed attributes can also cak as a input to other resources being created via terraform. called cross-account resource:
+
+**Cross-Account rescource**
+
+```hcl
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.ec2.id   # which ec2
+  allocation_id = aws_eip.eip.id        # which  eip
 }
 ```
 
@@ -104,15 +125,51 @@ output "<name>"{
 
 ### variable:
 ---------
-Is used when give the input when you run the code, basscally it wil ask for the "enter value" and place that value in the menction place
+is like a central scource for the terraform where you put you static values and user repetablitaly.\
 
--see variabtle.tf for the code 
+**varable.tf:**
+this i waher you set the types of the varable you want to input:
+
+```hcl
+varable "<name of the varable>" {
+    defult = <value>
+}
+```
+The advantageof have the varable is that, you specfice the type you can enter in the .tfvar file
+
+| Variable.tf | terraform.tfvar |
+|-------------|-----------------|
+| varible "instance_name"{  |  instance_name = " munna-123" |
+   type = number                   won't let              
+}                                                         
+
+
+```hcl
+provider "aws" {
+  region  = "us-east-1"
+  access_key = var.access_key
+  secret_key = var.secret_key
+}
+
+          terraform.tfvars:
+          -----------------
+          access_key = "AKIAIQALPXYK5CCNX2IA"
+          secret_key = "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"
+          Subnet_id = "10.0.1.0/24"
+
+```
+You can mention in the rum as well:
 ```HCL        
-        > ferraform apply -var "<terraform_resource name> = <Vallue>"
+        > terraform apply -var "<terraform_resource name> = <Vallue>" # this not apt way
 ````
+if you do not give any input when you run the code and did not mention in the var file - basscally it wil ask for the "enter value".
 
-But in the workplace you don't use the either of this methods- terraform looks for the file called - "terraform.tfvars"
+
+But in the workplace you don't use the either of this methods- terraform looks for the file called - **"terraform.tfvars"**
                                                                                                         `<terraform_resource name> = "10.0.100.0/24"`
+
+**Data type of variable:**
+
 
 
 
