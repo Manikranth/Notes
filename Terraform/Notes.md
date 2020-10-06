@@ -756,6 +756,7 @@ If a creation time provisioners fails, the resecources is marker as tainted.
 
 
 **Destory time provisioners**
+
 They are only run before the rescources is destoyed.
 
 
@@ -767,12 +768,13 @@ provisioner "local-exec" {
 ```
 
 **Failuer Bhevior For the provisioners**
+
 Even if you the resources is tained due to the creation time provisioners. we use Failuer Bhevior For the provisioners:
 
 **on_failuer** is userd
 
-Continue - ignore the error and continue with the creation and destruction
-fail - Raise an error and stop applying (the default brhaior). If this is a creation provisioners, taint the resources. (defulate)
+- Continue - ignore the error and continue with the creation and destruction
+- fail - Raise an error and stop applying (the default brhaior). If this is a creation provisioners, taint the resources. (defulate)
 
 
 ### Module
