@@ -834,27 +834,106 @@ when you switch b/w the workspace you will get the approited instances_type
 Terraform maintain the eash workspace terrafrom.tfstate file supperstly in the folder terrafrom.tfstate.d
 
 
+**Git**
+Git is where you save the code for the centeralzise persposess. 
+you should create the **.gitignor** to not save the file like:
 
-### Team Collabration:
+- .terraform
+- treeaform.tfstate
 
+But you do not have the terrafrom.tfstate file how to terraform will what is the current state. So we use Remote Backend
 
+**Remote Backend**
 
-
-
-
-
-
-
-
-
-
+It is the server where you can save the file which you couldn't save in the central repo. Remote Backend can like S3, consul, gus, swift etc... by adding a file called resource:
 
 
+```
+terraform {
+  backend "s3"{
+    bucker = ""
+    key = "xxxxx.tfstate"
+    region = "US-EAST-1A"
+    access_key = "aeraethevb waereartaqRT"
+    secret_key = "sdfgsdfhdgfhdfgshsha"
+  }
+}
+
+```
+
+- Standard BackEnd Type:    State Storage and Locking
+- Enhanced BackEnd Type:  All features of Standard + Remote Management
 
 
 
+**State file Locking**
+
+- It like puppet lock file where when 2 people are running the terraform plan it will lock the .tfstate file.
+- Locking will not work in the Remote Backend option by defult. To enavble the locking to work with S3 you need to add dynamoDB:
+
+```
+terraform {
+  backend "s3"{
+    bucker = ""
+    key = "xxxxx.tfstate"
+    region = "US-EAST-1A"
+    access_key = "aeraethevb waereartaqRT"
+    secret_key = "sdfgsdfhdgfhdfgshsha"
+    dynamoDB = "table_name"
+  }
+}
+
+```
 
 
+**Terraform State Management:** 
+
+- As your Terraform usage becomes more advanced, there are some cases where you may need to modify the Terraform state.
+
+- It is important to never modify the state file directly. Instead, make use of terraform state command.
+
+- There are multiple sub-commands that can be used with terraform state, these include:
+
+**Sub-commends:**
+ 
+```
+terraform state list
+```
+**List** - all the resources-full-name
+      
+```
+terraform state mv <existing_name> <new_name>
+```
+**mv**   - you want to rename an existing resource without destroying and recreating it.
+
+```
+terraform state pull
+```
+**pull**  - The terraform state pull command is used to manually download and output the state from a remote state.
+
+```
+terraform state push
+```
+**push**  - The terraform state push command is used to manually upload a local state file to remote state.
+ 
+```
+terraform state rm <Resource_name>
+```
+ **rm (remove)**    
+- The terraform state rm command is used to remove items from the Terraform state.
+- Items removed from the Terraform state are not physically destroyed. 
+- Items removed from the Terraform state are only no longer managed by Terraform
+- For example, if you remove an AWS instance from the state, the AWS instance will continue running, but terraform plan will no longer see that instance.
+
+
+```
+terraform state show <resource_name>
+```
+ **Show**
+- The terraform state show command is used to show the attributes of a single resource in the Terraform state.
+
+
+**Terrafrom Import:**
 
 
 
