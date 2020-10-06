@@ -818,7 +818,7 @@ module "<name>" {
 
 Intergrating the varriable to change the resecource at will:
 
-```hvl
+```hcl
 
     /.
     /..
