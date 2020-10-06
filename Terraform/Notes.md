@@ -770,7 +770,7 @@ Intergrating the varriable to change the resecource at will:
 
 ```
 
-**Terraform Registry**
+### **Terraform Registry**
 
 - The Terraform Registry is a repository of modules written by the Terraform community. 
 
@@ -788,7 +788,7 @@ module "ec2-instance" {
 ```
 
 
-**Terraform Workspace** 
+### **Terraform Workspace** 
 
 Terraform allows us to have multiple workspaces, with each of the workspaces we can have a different set of environment variables associated
 
@@ -843,7 +843,7 @@ you should create the **.gitignor** to not save the file like:
 
 But you do not have the terrafrom.tfstate file how to terraform will what is the current state. So we use Remote Backend
 
-**Remote Backend**
+### **Remote Backend**
 
 It is the server where you can save the file which you couldn't save in the central repo. Remote Backend can like S3, consul, gus, swift etc... by adding a file called resource:
 
@@ -866,7 +866,7 @@ terraform {
 
 
 
-**State file Locking**
+### **State file Locking**
 
 - It like puppet lock file where when 2 people are running the terraform plan it will lock the .tfstate file.
 - Locking will not work in the Remote Backend option by defult. To enavble the locking to work with S3 you need to add dynamoDB:
@@ -886,7 +886,7 @@ terraform {
 ```
 
 
-**Terraform State Management:** 
+### **Terraform State Management:** 
 
 - As your Terraform usage becomes more advanced, there are some cases where you may need to modify the Terraform state.
 
@@ -933,7 +933,10 @@ terraform state show <resource_name>
 - The terraform state show command is used to show the attributes of a single resource in the Terraform state.
 
 
-**Terrafrom Import:**
+### **Terrafrom Import:**
+Terraform is able to import existing infrastructure. This allows you to take resources you've created manually under Terraform management.
+
+
 
 
 
