@@ -106,6 +106,7 @@ A provider is responsible for understanding API interactions and exposing resour
 These providers have different vsersion as well, if version argument is not specified, the most recent provder will be downloded duting the first "init". 
  For production use - you should constrain the acceptable provider version, as a new version can brack the existing biuld. 
                                                                   
+if you download the AWS CLI you do not need to put the access_key & secret_key 
 
 **Formate**
 ```HCL
@@ -182,6 +183,80 @@ These providers have different vsersion as well, if version argument is not spec
 There are two major categories for terraform providers:
 
 **HashiCorp Distributed providers** - can be downloaded automatically during terraform init.
+
+### If You want to deploy in multiply reagions/ differnt accounting:
+
+Aliers are the way to do for the **diff region**:
+
+```hcl 
+
+povider "aws" {
+  region = "us-east-2"
+}
+
+
+povider "aws" {
+  alias = "N.verg"
+  region = "us-east-1"
+}
+
+                        resource "aws_ip" "test" {
+                           VPC = "true"
+                        }
+
+                        resource "aws_ip" "test2" {
+                           VPC = "true"
+                           provider = "aws.N.verg"
+                        }
+
+
+```
+
+
+The way to do for the **diff AWS Accounting**:
+
+```hcl
+# After you inport the AWS CLI and the have the AWS/credenials 
+
+/.
+/..
+/.aws
+    > /.
+      /..
+      /credenials
+            [default]
+            aws_access_key_id = skgfkwshflwhekaewgrlgh
+            aws_secret_access_key = kewrghkwerhelhrglegrhliqhirhuweiqhweriulhqweilruhgliquh
+            
+                        
+            [aoount02]
+            aws_access_key_id = skjhlrtghlaerhgliehgliue
+            aws_secret_access_key = kjalrhtlwehrtglhlwkshjgklwjehrglkwhglrwhrsjhyksegdfrkerwggh
+            
+            
+            
+povider "aws" {
+  region = "us-east-2"
+}
+
+
+povider "aws" {
+  alias = "N.verg"
+  region = "us-east-1"
+  profile = "account02"
+}
+
+                      resource "aws_ip" "test" {
+                         VPC = "true"
+                      }
+
+                      resource "aws_ip" "test2" {
+                         VPC = "true"
+                         provider = "aws.N.verg"
+                      }
+
+```
+
 
 
 ### 3rde pary Providers:
@@ -936,10 +1011,45 @@ terraform state show <resource_name>
 ### **Terrafrom Import:**
 Terraform is able to import existing infrastructure. This allows you to take resources you've created manually under Terraform management.
 
+```
+terraform import <resource_full-name> <id>
+
+# But to this to work you need to have a .tf file written and link that existing manual resource to the written code
+
+resource "aws_instance" "Test_terraformtwo" {
+  ami           = "ami-00514a528eadbc95b"
+   instance_type = "<manual_ec2_type>"
+   tags = {
+     Name = "<manual_ec2_name>"
+   }
+   }
+# add all the variables that are needed then you can link and import that resource to the .tfstart file
+```
 
 
 
+### **Handling Access & Secret Keys the Right Way in Providers**
 
+If you download the AWS CLI you do not need to put the access_key & secret_key. And take the from the AWS credintonal file. 
+
+
+```
+/.
+/..
+/.aws
+    > /.
+      /..
+      /credenials
+            [default]
+            aws_access_key_id = skgfkwshflwhekaewgrlgh
+            aws_secret_access_key = kewrghkwerhelhrglegrhliqhirhuweiqhweriulhqweilruhgliquh
+            
+                        
+            [aoount02]
+            aws_access_key_id = skjhlrtghlaerhgliehgliue
+            aws_secret_access_key = kjalrhtlwehrtglhlwkshjgklwjehrglkwhglrwhrsjhyksegdfrkerwggh
+            
+```
 
 
 
