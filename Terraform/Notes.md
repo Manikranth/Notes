@@ -19,7 +19,7 @@ Wheat terraform try to do os that it will allways try to match Desired State wit
 
 ### File system:
 ------------
-**Terraform foulder:**
+**.Terraform foulder:**
 
 Terraform foulder is created when you run the terrafrom init so that it download the plugins that are need for the "provider" menctioned in the code. 
 
