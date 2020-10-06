@@ -672,6 +672,193 @@ resource "aws_instance" "terraform_ec2" {
 
 ```
 
+**creation time provisioners**
+They are only run during creation, not during updarting or any other lifecycle.
+
+If a creation time provisioners fails, the resecources is marker as tainted.
+
+```
+
+```
+
+
+**Destory time provisioners**
+They are only run before the rescources is destoyed.
+
+
+```hcl
+provisioner "local-exec" {
+       when    = destroy
+       command = "echo 'Destory-time provisioner'"
+     }
+```
+
+**Failuer Bhevior For the provisioners**
+Even if you the resources is tained due to the creation time provisioners. we use Failuer Bhevior For the provisioners:
+
+**on_failuer** is userd
+
+Continue - ignore the error and continue with the creation and destruction
+fail - Raise an error and stop applying (the default brhaior). If this is a creation provisioners, taint the resources. (defulate)
+
+
+### Module
+**DRY Principle:**
+
+DRY (Don't repeat youself):
+
+Module are the centralize the terraform resources and can call out from TF files whenever required.
+ 
+Modles are like varilables but outside the different foulder
+
+```hcl
+module "<name>" {
+      source = "<location path>"
+}
+
+```
+
+```hcl
+    /.
+    /..
+    /module
+      /ec2.tf   #where you ec2 resournes is coded
+                 resource "aws_instance" "myec2" {
+                     ami = "ami-082b5a644766e0e6f"
+                     instance_type = t2.micro
+                }
+
+    
+    
+    /.
+    /..
+    /projest.tf 
+              module "ec2module" {
+                  source = "../../modules/ec2"
+              }
+
+```
+
+
+Intergrating the varriable to change the resecource at will:
+
+```hvl
+
+    /.
+    /..
+    /varilable.tf
+          varilable "instance_type" {
+                defult = "t2.large"
+          }
+          
+    /module
+      /ec2.tf   #where you ec2 resournes is coded
+                 resource "aws_instance" "myec2" {
+                     ami = "ami-082b5a644766e0e6f"
+                     instance_type = var.instance_type
+                }
+
+    
+    
+    /.
+    /..
+    /projest.tf 
+              module "ec2module" {
+                  source = "../../modules/ec2"
+              }
+
+
+```
+
+**Terraform Registry**
+
+- The Terraform Registry is a repository of modules written by the Terraform community. 
+
+- The registry can help you get started with Terraform more quickly
+
+Basically therte are the mobules in the terraform server:
+
+```hcl
+module "ec2-instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"  # How to call the modules from the terraform server 
+  version = "2.13.0"      #model in the terraform server has the vesrion.
+  # insert the 10 required variables here
+}
+
+```
+
+
+**Terraform Workspace** 
+
+Terraform allows us to have multiple workspaces, with each of the workspaces we can have a different set of environment variables associated
+
+Terraform starts with a single workspace named "default".
+
+This workspace is special both because it is the default and also because it cannot ever be deleted.
+
+
+```shell
+
+terraform workspace
+
+CLI:
+
+  new 
+  list 
+  show  - show the current 
+  select - switch b/w the workspace
+  delete - Terraform workspaces.
+
+```
+
+```hcl
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = lookup(var.instance_type,terraform.workspace)
+}
+
+variable "instance_type" {
+  type = "map"
+
+  default = {
+    default = "t2.nano"
+    dev     = "t2.micro"
+    prd     = "t2.large"
+  }
+}
+
+
+when you switch b/w the workspace you will get the approited instances_type
+```
+
+Terraform maintain the eash workspace terrafrom.tfstate file supperstly in the folder terrafrom.tfstate.d
+
+
+
+### Team Collabration:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
