@@ -677,6 +677,7 @@ terrafrom apply <file_name>
 
 
 **Terrafron Setting**
+
 It's a block of code that sit suppertely that resterct few  versioning:
 
 ```
@@ -748,13 +749,10 @@ resource "aws_instance" "terraform_ec2" {
 ```
 
 **creation time provisioners**
+
 They are only run during creation, not during updarting or any other lifecycle.
 
 If a creation time provisioners fails, the resecources is marker as tainted.
-
-```
-
-```
 
 
 **Destory time provisioners**
