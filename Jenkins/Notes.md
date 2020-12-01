@@ -44,4 +44,8 @@ sudo yum install -y jdk-8u141-linux-x64.rpm
 java -version
 
 /usr/java/jdk1.8.0_141/
+
+
+
+
 ````
