@@ -423,6 +423,8 @@ The main docker-compose connends:
                 version            Show version information and quit
 
 
+**Docker file vs docker compose**
+Remember, docker-compose. yml files are used for defining and running multi-container Docker applications, whereas Dockerfiles are simple text files that contain the commands to assemble an image that will be used to deploy containers.
 
 
 Docker Swarm:
