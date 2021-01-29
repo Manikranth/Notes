@@ -25,3 +25,18 @@
         
         
  ** 
+
+
+
+what application run on your server
+
+
+If you have a an appliacction running in  10 micro severs - how you keep the application aviable all the time anf keep it robust. 
+
+
+How did you leverage servers 
+
+
+Elestic-bean-stack is for dynimcly incressing and decessding 
+
+
