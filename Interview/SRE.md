@@ -1,9 +1,9 @@
 **1. What is a site reliability engineer? (SRE)**
       
-SRE person are responsible for how code is deployed, configured, and monitored, as well as the availability, latency, change management, emergency response, and capacity management of services in production.
-Site reliability engineering helps teams to determine what new features can be launched and when by using service-level agreements (SLAs) to define the required reliability of the system through service-level indicators (SLI) and service-level objectives (SLO). 
-An SLI is a defined measure of specific aspects of provided service levels. Key SLIs include request latency, availability, error rate, and system throughput. An SLO is based on the target value or range for a specified service level based on the SLI.
-An SLO for the required system reliability is then determined based on the downtime agreed upon as acceptable. This downtime level is referred to as an error budget, the maximum allowable threshold for errors and outages. 
+- SRE person are responsible for how code is deployed, configured, and monitored, as well as the availability, latency, change management, emergency response, and capacity management of services in production.
+- Site reliability engineering helps teams to determine what new features can be launched and when by using service-level agreements (SLAs) to define the required reliability of the system through service-level indicators (SLI) and service-level objectives (SLO). 
+- An SLI is a defined measure of specific aspects of provided service levels. Key SLIs include request latency, availability, error rate, and system throughput. An SLO is based on the target value or range for a specified service level based on the SLI.
+- An SLO for the required system reliability is then determined based on the downtime agreed upon as acceptable. This downtime level is referred to as an error budget, the maximum allowable threshold for errors and outages. 
 
 With SRE, 100% reliability is not expected; failure is planned for and accepted.
       
