@@ -1,4 +1,5 @@
 **1. What is a site reliability engineer? (SRE)**
+      
       SRE person are responsible for how code is deployed, configured, and monitored, as well as the availability, latency, change management, emergency response, and capacity management of services in production.
       Site reliability engineering helps teams to determine what new features can be launched and when by using service-level agreements (SLAs) to define the required reliability of the system through service-level indicators (SLI) and service-level objectives (SLO). 
       An SLI is a defined measure of specific aspects of provided service levels. Key SLIs include request latency, availability, error rate, and system throughput. An SLO is based on the target value or range for a specified service level based on the SLI.
@@ -10,6 +11,7 @@
       https://cloud.google.com/blog/products/gcp/sre-vs-devops-competing-standards-or-close-friends
       
  **Roles and responsibilities of an SRE**
+      
       Building services for DevOps, IT operations and customer support teams
       Remediating support escalation cases
       Take and enhance on-call responsibilities
@@ -17,6 +19,7 @@
       
       
 **How can I improve the CPU performance of my Amazon EC2 Linux instances?**
+         
          Hardware virtual machine (HVM) Amazon Machine Images (AMIs)
         Using HVM AMIs for improved performance. HVM AMIs also offer newer instance classes (for example, M5, M4, and R4) and Amazon EC2 features such as enhanced networking. 
         
