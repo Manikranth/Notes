@@ -35,4 +35,6 @@ To improve performance, you can use enhanced networking on supported instance ty
 
 **- Elestic-bean-stack is for dynimcly incressing and decessding**
 
+**- what is the minimen average response time of you servers - 30 milliseconds **
+
 
