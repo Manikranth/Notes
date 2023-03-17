@@ -1,6 +1,6 @@
 # TERRAFORM:
 ------------
-It witten in the ashi corp conf lang with .tf extantion. it rewriten in the declarative mammer means - it do not run the run code but accutally check the cloud (where ever you are creating) and make sure it has all the instancres are persent. 
+It witten in the ashi corp conf lang with .tf extantion. it rewriten in the declarative mammer means - it do not run the run code but accutally check the cloud (where ever you are creating) and make sure it has all the resources are persent. 
 
 ### Desired & Current States
 ------------------------
