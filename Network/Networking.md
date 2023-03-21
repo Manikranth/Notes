@@ -6,8 +6,8 @@ It's a 2 key for security system which involves in:
  - Private key 
  - Public key 
 
-public keys are used to encrypt a file and private Keith are used to decrypt files.
-So if you want to send a secure message, all you have to do is use the public key to encrypt it and send it to the person who has the private key so that they can decrypt and read the message, this is what PKI does. 
+public keys are used to encrypt a file and private Keith are used to decrypt files. or vice versa
+So if you want to send a secure message, all you have to do is use the public key to encrypt it and send it to the person who has the private key so that they can decrypt and read the message, or vice versa this is what PKI does. 
 
 But now the problem is how do you know the public key is a valid public key meaning - how do you know that you are getting the right persons public key. That is where CA comes. CA is a certificate authority, backed up by government to issue a digital signed digital certificate to the user with the data of who the user is who that public belongs to. 
 
