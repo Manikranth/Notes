@@ -84,6 +84,34 @@ SSL Certificates facilitate an encrypted connection between a browser and a web 
 There are three kinds of certificates, DV, OV and EV. They offer varying levels of authentication but the same form of industry-standard encryption. The key to selecting the right SSL/TLS certificate is deciding what level of authentication you need. Smaller websites that do not collect user information may be better off saving money on a DV certificate. Business websites and E-Commerce sites should spring for an OV or EV certificate depending on their size and need for authentication.
 
 
+**What is TLS**
+TLS is based on SSL and was developed as a replacement in response to known vulnerabilities in SSLv3.
+
+SSL is the term commonly used, and today usually refers to TLS.
+
+
+
+
+**Digital Certificate Types**
+If you are trying to purchase a certificate for a website or to use for encrypting MQTT you will encounter two main types:
+
+Domain Validated Certificates (DVC)
+Extended validation Certificates (EVC)
+The difference in the two types is the degree of trust in the certificate which comes with more rigorous validation.
+
+**A domain-validated certificate (DV)** is an X.509 digital certificate typically used for Transport Layer Security (TLS) where the identity of the applicant has been validated by proving some control over a DNS domain
+
+**An Extended Validation Certificate (EV)** is a certificate used for HTTPS websites and software that proves the legal entity controlling the website or software package. Obtaining an EV certificate requires verification of the requesting entity’s identity by a certificate authority (CA).
+
+
+
+**What is a certificate fingerprint?**
+It is a hash of the actual certificate, and can be used to verify the certificate without the need to have the CA certificate installed.
+
+This is very useful in small devices that don’t have a lot of memory to store CA files.
+
+It is also used when manually verifying a  certificate.
+
 
 
 
