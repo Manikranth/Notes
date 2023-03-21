@@ -9,9 +9,11 @@ It's a 2 key for security system which involves in:
 public keys are used to encrypt a file and private Keith are used to decrypt files. or vice versa
 So if you want to send a secure message, all you have to do is use the public key to encrypt it and send it to the person who has the private key so that they can decrypt and read the message, or vice versa this is what PKI does. 
 
-But now the problem is how do you know the public key is a valid public key meaning - how do you know that you are getting the right persons public key. That is where CA comes. CA is a certificate authority, backed up by government to issue a digital signed digital certificate to the user with the data of who the user is who that public belongs to. 
+But now the problem is how do you know the public key is a valid public key meaning - how do you know that you are getting the right persons's public key. That is where CERT comes. CERTS are digital signed digital certificate given to the user with the data of "who is the user" , "what is public key" and "whoes it belongs to". 
 
+** who issues the certificates?**
 
+CA does - they are certificate authority, backed up by government to issue certificate:
 **What is a certificate authority (CA)?**
 
 A certificate authority (CA) is a trusted entity that issues Secure Sockets Layer (SSL) certificates. These digital certificates are data files used to cryptographically link an entity with a public key. Web browsers use them to authenticate content sent from web servers, ensuring trust in content delivered online.
