@@ -85,7 +85,7 @@ There are three kinds of certificates, DV, OV and EV. They offer varying levels 
 
 
 
-![]([URL](https://www.thesslstore.com/content/images/encrypt-certificate-process.svg) "SSL Handshake")
+![](Screenshot 2023-03-21 at 1.36.31 AM.png)
 
 
 
