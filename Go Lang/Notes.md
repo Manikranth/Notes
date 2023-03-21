@@ -114,3 +114,20 @@ In this example, we create a channel named messages and a goroutine that sends "
   - Channels are used to communicate and synchronize between goroutines.
   - Use the make function to create a channel, and the channel operator <- to send and receive values.
   - Use close to close a channel when no more values will be sent on it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://go.dev/tour/welcome/1
