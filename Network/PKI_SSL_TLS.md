@@ -1,4 +1,11 @@
 
+### Encryption:
+Encryption is the process of converting plaintext data into an unreadable format (ciphertext) to protect it from unauthorized access. Decryption is the reverse process, converting ciphertext back into plaintext. Encryption algorithms can be classified into two categories:
+
+**Symmetric encryption:** The same key is used for both encryption and decryption. Examples of symmetric algorithms include AES, DES, and 3DES.
+**Asymmetric encryption**: Different keys are used for encryption and decryption, known as a public and private key pair. Examples of asymmetric algorithms include RSA, ECC, and ElGamal.
+
+
 **Whta is PKI**
 It's a two key Asymmetric-cryptography system, it's a framework that will help IP systems have a high level information confidentialities true, strong data encryption, which provides high level of confidence, through digital signatures, and digital certificates.
 
