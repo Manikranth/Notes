@@ -1,5 +1,9 @@
 ## Authorization vs Authentication
 
+
+<span style="color:blue">This text is blue</span>
+
+
 ### Authentication:
   
 Authentication is the process of verifying the identity of a user, device, or system. It aims to ensure that a user is who they claim to be. Common methods of authentication include:
@@ -32,6 +36,7 @@ Downside for the standard authentication is that the session ID Hass to be store
 
 
 **what is JWT (JSON Web Token)?**
+
 What JWT dues is instead of browser cookies, it uses Jason Webb token for authorization
 
 
@@ -56,3 +61,10 @@ Since we are storing the JW token in the client, which is a browser, you can aut
 
 
 what is OAUTH?
+
+
+OAuth is an authorization framework that allows third-party applications to obtain limited access to a user's resources on another service without revealing the user's credentials. OAuth 2.0, the current version of the framework, defines a protocol for granting and revoking access tokens, which can be used by the third-party applications to access the protected resources. OAuth 2.0 is not an authentication protocol but can be extended with OpenID Connect (OIDC) to add an authentication layer. The main features of OAuth include:
+
+- Delegated authorization: Users can grant third-party applications access to their resources without sharing their credentials.
+- Access control: The level of access can be controlled by issuing tokens with specific scopes, limiting what actions can be performed.
+- Revocable access: Access tokens can be revoked by the user or the service at any time.
