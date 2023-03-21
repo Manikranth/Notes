@@ -1,6 +1,6 @@
 
 **Whta is PKI**
-It's a two key asymmetric crypto system, it's a framework that will help IP systems have a high level information confidentialities true, strong data encryption, which provides high level of confidence, through digital signatures, and digital certificates.
+It's a two key Asymmetric-cryptography system, it's a framework that will help IP systems have a high level information confidentialities true, strong data encryption, which provides high level of confidence, through digital signatures, and digital certificates.
 
 It's a 2 key for security system which involves in:
  - Private key 
