@@ -1,42 +1,49 @@
 # TERRAFORM:
-------------
-It is written in the ashi corp conf lang with .tf extension. It is rewritten in a declarative manner means - it does not run the run code but checks the cloud (where ever you are creating) and ensures it has all the resources present. 
 
-### Desired & Current States
-------------------------
+It is written in the HCL (Hasicorp conf lang) with a .tf extension. It is rewritten in a declarative manner means - it does not run the code but checks the cloud and ensures it has all the resources. 
+
+<br>
+
 **Desired States:**
 
-The start of the resource is mentioned in the code file(.tf)
+The state of the resources mentioned in the code file(.tf)
 
 **Current States:**
 
-The stats of the current resource in the provider or stats of the current resource in the .tfstate file (if it is not in sync with the provider, have to run the terraform plan/refresh)
+The state of the current resource in the provider or state of the current resource in the .tfstate file (if it is not in sync with the provider, have to run the terraform plan/refresh)
 
-Wheat terraform try to do is that it will always try to match Desired State with the Current state:
+What terraform tries to do is - it will always try to match Desired State with the Current state:
                           
-                          `Desired State == Current State`
+                    Desired State == Current State
 
+<br>
+<br>
 
-### File system:
+<span style="color: #008DB6 ;"> File system:
 ------------
 **.Terraform foulder:**
 
-Terraform folder is created when you run the terraform init to download the plugins needed for the "provider" mentioned in the code. 
+.terraform folder gets created when we run the `terraform init` to download the plugins needed for the "provider" mentioned in the code. 
+
+<br>
 
 **Terraform.tfstate:**
 
-Terraform creates a terrafrom.tfstate file to keep track of itself and what it created whenever terraform apply is run. It checks to terraform.tfstate file to make sure what needs to be added or changed. 
-It's a way for the terraform to what is that it created.
+Terraform creates a `terrafrom.tfstate` file to track what it creates whenever we do `terraform apply`. It checks to terraform.tfstate file to ensure what needs to be added or changed for the previous run. 
 
+It's a way for the terraform to know what it has created.
 
-### CLI
+<br>
+<br>
+
+<span style="color: #008DB6;"> CLI
 ----
 
 **Mani Commands**
 
-- Without running "init," terraform will not download the plugins to run the code.
-- if you are running the provider for the first time, you must run "terraform init."
-- Error: Could not load plugin -Plugin reinitialization required. Please run "terraform init".
+- Without running `terraform init`, terraform will not download the plugins to run the code.
+- If you are creating the provider for the first time, you must run `terraform init`.
+- <span style="color: #B1002B;"> Error: </span> Could not load plugin -Plugin reinitialization required. Please run `terraform init`.
 
             init               Initialize a Terraform working directory
             plan               Generate and show an execution plan
@@ -46,10 +53,10 @@ It's a way for the terraform to what is that it created.
    
    ` terraform destroy -traget <total resource_name> `                                       
             
-            destroy     ---       Destroy Terraform-managed infrastructure
+           destroy     ---       Destroy Terraform-managed infrastructure
  
 
-- #it shows terraform apply output without applying                                        
+- `terrform Plain` shows terraform apply output without applying                                        
             
             refresh            Update local state file against real resources
             console            Interactive console for Terraform interpolations
@@ -68,6 +75,9 @@ It's a way for the terraform to what is that it created.
             validate           Validates the Terraform files
             version            Prints the Terraform version
             workspace          Workspace management
+
+
+<br>
 
 **All other commands:**
         
@@ -88,7 +98,12 @@ It's a way for the terraform to what is that it created.
         rm                  Remove instances from the state
         show                Show a resource in the state
 
-## Providers
+<br>
+<br>
+<br>
+
+
+<span style="color: #008DB6;">  Providers:
 -----------
 Terraform creates, manages, and updates infrastructure resources such as physical machines, VMs, network switches, containers, and more. Almost any infrastructure type can be represented as a resource in Terraform.
 
@@ -100,15 +115,19 @@ A provider is responsible for understanding API interactions and exposing resour
                                                       This is the provider outside the 
                                                                terraform that 
                                                              get downloaded when 
+               
                                                         run "init" for the first time
 
 ```
-These providers have different versions as well. The most recent provider will be downloaded during the first "init" if the version argument is not specified. 
- For production use - you should constrain the acceptable provider version, as a new version can break the existing build. 
-                                                                  
-If you download the AWS CLI, you do not need to put the access_key & secret_key 
+These providers have different versions as well. The most recent provider will be downloaded during the first ` terraform init`, if the version argument is not specified.
 
-**Formate**
+- For production use - you should constrain the acceptable provider version, as a new version can break the existing build. 
+                                                                  
+
+
+<br>
+
+**Syntex:**
 ```HCL
 # resource "<provider>_<resource_type>" "name" {
            #    config options......
@@ -126,10 +145,11 @@ If you download the AWS CLI, you do not need to put the access_key & secret_key
             -- ~>2.0
             -- >=2.10, <=2.30                                                            
 ```
+- If you download the AWS CLI, you do not need to put the access_key & secret_key 
 
+<br>
 
-
-**Example:**
+**Example1:**
 
 ```HCL
 
@@ -157,6 +177,8 @@ If you download the AWS CLI, you do not need to put the access_key & secret_key
              }
 ```
 
+<br>
+
 **Example:2**
 
 **AWS_VPC**
@@ -180,11 +202,14 @@ If you download the AWS CLI, you do not need to put the access_key & secret_key
       }
 ```
 
-There are two major categories for terraforming providers:
 
-**HashiCorp Distributed providers** - can be downloaded automatically during terraform init.
+<br>
+<br>
 
-### If You want to deploy in multiple reagions/different accounting:
+
+
+
+**If You want to deploy in multiple reagions/different accounting:**
 
 Aliers are the way to do for the **diff region**:
 
@@ -211,6 +236,8 @@ provider "aws" {
 
 
 ```
+
+<br>
 
 
 The way to do for the **diff AWS Accounting**:
@@ -258,9 +285,19 @@ provider "aws" {
 ```
 
 
+<br>
 
-### 3rde party Providers:
----------------------
+<br>
+
+**There are two major categories for terraforming providers:**
+
+**HashiCorp Distributed providers:**  
+- can be downloaded automatically during terraform init.
+
+<br>
+
+**3rd party Providers:**
+
 - terraform init cannot automatically download providers that HashiCorp does not distribute
 - It can happen that the official provider does not support specific functionality.
 - Some organizations might have their proprietary platform for which they want to use Terraform.
@@ -282,17 +319,25 @@ provider "aws" {
 - move the download file to the folder ~/.terraform.d/plugins
 - run $ terrafrom inti
 
+<br>
 
-### Output
+<br>
+
+<br>
+
+<span style="color: #008DB6;"> Output:
 -----------
-It will give you the desired target specified when you run the "terraform apply" or "terraform output" after the terraform apply. 
+
+Output variables can be used to display information about the resources you've created or managed, such as IP addresses, DNS names, or other data that you may need to reference after the infrastructure has been provisioned.
+
+Output variables are declared in your Terraform configuration files using the output keyword. For example:
 
 ```HCL
 output "<name>"{
  value = <ressource name>.<attribites>  # If you do not specify the attributes, it will give all the attributes of the resource
 }
 ```
-Attributes mean the attributes of the resources we are calling. Like: 
+Attributes resources we are calling like: 
 ```
 association_id 
 domain 
@@ -305,7 +350,7 @@ ETC..
 
 An output attribute can also act as an input to other resources being created via terraform. Called cross-account resource:
 
-**Cross-Account resource**
+**Cross-Account resource:**
 
 ```hcl
 resource "aws_eip_association" "eip_assoc" {
@@ -313,18 +358,24 @@ resource "aws_eip_association" "eip_assoc" {
   allocation_id = aws_eip.eip.id        # which  eip
 }
 ```
-
+**Syntex:**
 ```hcl
 terraform output <attridit>
 ```
 
+<br>
 
-### variable:
+<br>
+
+<br>
+
+<span style="color: #008DB6;"> Variable:
 ---------
 It is like a central source for the terraform where you put your static values and use them repeatedly.
 
 **variable.tf:**
-this is where you set the types of variables you want to input:
+
+This is where you set the types of variables you want to input:
 
 ```hcl
 variable "<name of the varable>" {
@@ -332,7 +383,8 @@ variable "<name of the varable>" {
 }
 ```
 
-}                                                         
+<br>
+
 
 **terraform.tfvars:**
 
@@ -355,17 +407,24 @@ provider "aws" {
           Subnet_id = "10.0.1.0/24"
 
 ```
-You can mention in the rum as well:
+You can mention in the run as well:
 ```HCL        
-        > terraform apply -var "<terraform_resource name> = <Vallue>" # this not apt way
+      terraform apply -var "<terraform_resource name> = <Vallue>" # this not apt way
 ````
 If you do not give any input when you run the code and did not mention it in the var file - it will ask for the "enter value."
 
 
-But in the workplace you don't use either of these methods- terraform looks for the file called - **"terraform.tfvars"**
-                                                                                                        `<terraform_resource name> = "10.0.100.0/24"`
+But in the workplace you don't use either of these methods- terraform will look for the file called - **"terraform.tfvars"**
 
-### **Data type of variable:**
+        <terraform_resource name> = "10.0.100.0/24"
+
+
+<br>
+<br>
+<br>
+
+
+<span style="color: #008DB6 ;"> Data type of variable
 ---------------------------
 The advantage of having the variable is that you specify the type you can enter in the .tfvar file.
 
@@ -382,8 +441,13 @@ The advantage of having the variable is that you specify the type you can enter 
 | map | {name = "Mabel", age = 52} |
 | number | 200 |
    
-   
-### **Cout Parameter:**
+
+
+<br>
+<br>
+<br>
+
+**Cout Parameter:**
 
 With the count Parameter, we can simply specify the count value and the resource can be scaled accordingly.
 
@@ -397,8 +461,10 @@ resource "aws_instance" "Test_terraform" {
    }
 
 ```
+<br>
 
-This creates the five ec2 with the same name Terraform. To solve this, we use **count.index**
+This creates the 5 ec2 with the same name Terraform. To solve this, we use "**count.index.**"
+
 **Count Index:**
  
  ```hcl
@@ -428,8 +494,9 @@ variable "test"{
    }
 
 ```
+<br>
 
-### **Conditional Expression:**
+**Conditional Expression:**
 
 A Conditional Expression uses the value of a **bool** Expression to select one of two values.
 ```
@@ -452,7 +519,9 @@ variable "test" {}
  }
  ```
 
-### **Local Value**
+<br>
+
+**Local Value:**
 
 A local value assigns a name to an expression and allows it to be used to multiply time within a module.
 
@@ -491,8 +560,9 @@ locals {
  
  ```
  
- 
-### **Terraform Function**
+<br>
+
+**Terraform Function:**
 
 https://www.terraform.io/docs/configuration/functions.html
 
@@ -517,8 +587,12 @@ Some do not support the user-defined function, and only the functions built into
 - IP network
 - Type Conversion
 
-### Data Scorce
+<br>
+<br>
+<br>
 
+<span style="color: #008DB6 ;">  Data Scorce:
+--
 You write a separate block of code that will be integrated will the main code.
 
 ```hcl
@@ -543,8 +617,12 @@ resource "aws_instance" "instance-1" {
 }
 
 ```
+<br>
+<br>
+<br>
 
-**Debrugging terraform:**
+<span style="color: #008DB6 ;">  Debrugging terraform:
+--
 Terraform has detailed logs, which can be enabled by setting the **Tf_LOG env.** variable to any value.
 
 ``` shell
@@ -554,8 +632,12 @@ export TF_LOG_PATH=/tmp/test.log
 ```
 
 
-**Terraform Formation**
+<br>
+<br>
+<br>
 
+<span style="color: #008DB6 ;">  Terraform Formation:
+--
 It is an arranging tool that will arrange the line of the code - **fmt**
 
 ```shell
@@ -563,7 +645,13 @@ terraform fmt <terraform.tf>
 
 ```
 
-**Terrafrom Validate**
+
+<br>
+<br>
+<br>
+
+<span style="color: #008DB6 ;">  Terrafrom Validate:
+--
 It checks whether the code is syntactically valid. It will check the error.
 
 ```shell
@@ -572,8 +660,12 @@ terraform valodate
 ```
 
 
-**Load Order & Semantics**
+<br>
+<br>
+<br>
 
+<span style="color: #008DB6 ;">  Load Order & Semantics:
+--
 It is a way to organize the terraform code. You do not need the entire code to be in one file. You can split it into different files will the resources.
 
 
@@ -602,8 +694,12 @@ When you run the terraform apply it runs fine.
       
 ```
 
-**Dynamic block**
+<br>
+<br>
+<br>
 
+<span style="color: #008DB6 ;">  Dynamic block
+--
 ```hcl
 
 variable "sg_ports" {
@@ -641,8 +737,12 @@ resource "aws_security_group" "dynamicsg" {
 ```
 
 
-**Tainting:**
+<br>
+<br>
+<br>
 
+<span style="color: #008DB6 ;">  Tainting:
+--
 The terraform taint command manually marks a Terraform-manged source as tainted, forcing it to be destroyed and recreated on the next apply.
 
 ```shell
@@ -653,19 +753,29 @@ By marking the resources trained - terraform will destroy and create that resour
 
 
 
-**Spalat EXperssion**
+**Spalat Experssion**
 
 Split EXperssion allows us to get a list of all the attributes.
  
 
-**Terrafrom Graph**
+<br>
+<br>
+<br>
+
+<span style="color: #008DB6 ;"> Terrafrom Graph
+--
 
 - Terrafrom Graph command generates a visual representation of either a conf. Or execution plan.
 
 - The O/P if terraform graph is in the DOT format, which can easily be converted to an image.
  
 
-**Terrafrom Path**
+<br>
+<br>
+<br>
+
+<span style="color: #008DB6 ;"> Terrafrom Path:
+--
 
 It will save the code to a different binary file so that even if you change the code, you can run:
 
@@ -676,8 +786,12 @@ terrafrom apply <file_name>
 
 
 
-**Terrafron Setting**
+<br>
+<br>
+<br>
 
+<span style="color: #008DB6 ;"> Terrafron Setting:
+--
 It's a block of code that sit supported that restrict few  versioning:
 
 ```
@@ -690,9 +804,13 @@ terraform {
 ```
 
  
-### **Provisioners:
+<br>
+<br>
+<br>
 
-Provisioners are the block of code that run set on comments in the ec2;
+<span style="color: #008DB6 ;"> Provisioners:
+-----
+Provisioners are the block of code that run set on comments in the ec2:
 
 ```hcl
 provisioner "test" {
@@ -701,8 +819,10 @@ provisioner "test" {
         "systemctl services nginx1 start"
     ]
 }
-
 ```
+
+<br>
+
 **Types of Provisioners**
  - Local Exec
  - Remote-Exec
@@ -1052,9 +1172,36 @@ You do not need to put the access_key & secret_key if you download the AWS CLI. 
             
 ```
 
+<br>
+<br>
+<br>
+<br>
+
+<span style="color: #008DB6 ;"> Terraform enterprise vs cloud vs open source:
+----- 
+https://coggle.it/diagram/X93PG__xpLL4Vk-R/t/terraform-oss-vs-cloud-vs-enterprise
 
 
 
+<br>
+<br>
+
+**Terraform Enterprise:**
+
+Terraform Enterprise is our self-hosted distribution of Terraform Cloud. It offers enterprises a private instance of the Terraform Cloud application, with no resource limits and with additional enterprise-grade architectural features like audit logging and SAML single sign-on.
+
+Terraform Enterprise adds several features and benefits on top of the open-source Terraform, including:
+
+- Collaboration and governance: It also offers role-based access control, policy enforcement, and approval workflows to maintain governance and compliance across the organization.
+
+- Remote operations: Instead locally, Terraform Enterprise enables users to execute remote operations like 'plan' and 'apply' within a secure, isolated environment. 
+
+- State management: Terraform Enterprise simplifies the management of Terraform state files, providing centralized storage, versioning, and locking. This reduces the risk of data loss, conflicts, and other issues associated with managing state files in a team environment.
+
+- Private module registry: Terraform Enterprise includes a private module registry where you can store, version, and share reusable Terraform modules within your organization. This
+
+<br>
+**Sentinel:**
 
 
 
