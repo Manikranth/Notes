@@ -1,0 +1,3 @@
+{
+    "allow_vm_type" : ["t2.micro", "m5.large", "t3.micro"]
+}

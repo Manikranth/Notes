@@ -1,0 +1,217 @@
+It witten in the ashi corp conf lang with .tf extantion. it rewriten in the declarative mammer means - it do not run the run code but accutally check the cloud (where ever you are creating) and make sure it has all the instancres are persent. 
+
+Desired & Current States
+------------------------
+Desired States:
+The start of the resource menctioned in the code file(.tf)
+
+Current States:
+The stats of the current resource in the proveder or stats of the current resource in the .tfstate file (if it not in the sync with the proveder have to run the terraform plan/refresh)
+
+Wheat terraform try to do os that it will allways try to match Desired State with Current State:
+                          >> Desired State == Current State
+
+
+File system:
+------------
+Terraform foulder:
+------------------
+Terraform foulder is created when you run the terrafrom init so that it download the plugins that are need for the "provider" menctioned in the code. 
+
+Terraform.tfstate:
+------------------
+Terraform creates a terrafrom.tfstate file to keep track for itself of what it created whenever terraform apply is run. it checks terraform.tfstate file to make sure what need to be added or changed. 
+Bassically it's way for the terraaform to what is that it created.
+
+
+Common commands:
+-----------------
+                                    (CLI- commends)
+                                        init               Initialize a Terraform working directory
+                                                           #Without running "init" terrafrom will not download the plugins to run the code.
+                                                           if you are ruuning the provider for the first time you need to run "terraform init"
+                                                           Error: Could not load plugin -Plugin reinitialization required. Please run "terraform init".
+                                                           
+                                        plan               Generate and show an execution plan
+                                        apply              Builds or changes infrastructure
+                                        destroy            Destroy Terraform-managed infrastructure
+                                                           #Traget -  will get the trageted resource destroy 
+                                                           # >> terraform destroy -traget <total resource_name> 
+                                        
+                                        refresh            Update local state file against real resources
+                                                           #it showes terraform apply output without applying 
+                                                            
+                                                            
+                                        console            Interactive console for Terraform interpolations
+                                        
+                                        show               Inspect Terraform state or plan
+                                         
+                                        env                Workspace management
+                                        fmt                Rewrites config files to canonical format
+                                        get                Download and install modules for the configuration
+                                        graph              Create a visual graph of Terraform resources
+                                        import             Import existing infrastructure into Terraform
+                                        login              Obtain and save credentials for a remote host
+                                        logout             Remove locally-stored credentials for a remote host
+                                        output             Read an output from a state file
+                                        providers          Prints a tree of the providers used in the configuration
+                                        
+                                        
+                                       
+                                        taint              Manually mark a resource for recreation
+                                        untaint            Manually unmark a resource as tainted
+                                        validate           Validates the Terraform files
+                                        version            Prints the Terraform version
+                                        workspace          Workspace management
+
+                                    All other commands:
+                                        0.12upgrade        Rewrites pre-0.12 module source code for v0.12
+                                        0.13upgrade        Rewrites pre-0.13 module source code for v0.13
+                                        debug              Debug output management (experimental)
+                                        force-unlock       Manually unlock the terraform state
+                                        push               Obsolete command for Terraform Enterprise legacy (v1)
+                                        
+                                        state              Advanced state management
+                                                            Subcommands:
+                                                              list                List resources in the state
+                                                              mv                  Move an item in the state
+                                                              pull                Pull current state and output to stdout
+                                                              push                Update remote state from a local state file
+                                                              replace-provider    Replace provider in the state
+                                                              rm                  Remove instances from the state
+                                                              show                Show a resource in the state
+
+
+Output
+-----------
+Will give you the desired traget that you sepcifi when you run the "terraform apply" or "terrafrom output" after the terraform apply. 
+
+output "<name>"{
+ value = <ressource name>.id
+}
+
+
+variable:
+---------
+Is used when give the input when you run the code, basscally it wil ask for the "enter value" and place that value in the menction place
+
+-see variabtle.tf for the code 
+        > ferraform apply -var "<terraform_resource name> = <Vallue>"
+        
+But in the workplace you don't use the either of this methods- terraform looks for the file called - "terraform.tfvars"
+                                                                                                        > <terraform_resource name> = "10.0.100.0/24"
+
+
+
+Providers
+-----------
+Terraform is used to create, manage, and update infrastructure resources such as physical machines, VMs, network switches, containers, and more. Almost any infrastructure type can be represented as a resource in Terraform.
+
+A provider is responsible for understanding API interactions and exposing resources. Most providers configure a specific infrastructure platform (either cloud or self-hosted). Providers can also offer local utilities for tasks like generating random numbers for unique resource names.
+ - To work with the terraform we need to install the nessary plugins to communate with the Providers. 
+ 
+                      CODE.TF   ---------------->   TERRAFORM   <---------------->   Providers   <----------------> SOURCE Providers 
+                                                                          This is the provider out side the 
+                                                                                  terraform that 
+                                                                                  get downloaded when 
+                                                                             run "init" for the forst time
+
+These providers have different vsersion as well, if version argument is not specified, the most recent provder will be downloded duting the first "init". 
+ For production use - you should constrain the acceptable provider version, as a new version can brack the existing biuld. 
+                                                                  
+                                                                  
+                                                                  provider "aws" {
+                                                                        region  = "us-east-1"
+                                                                        version = "2.7"
+                                                                            
+                                                                            How to set the vsersion for the provider
+                                                                                    -- >=1.0          
+                                                                                    -- <=1.0
+                                                                                    -- ~>2.0
+                                                                                    -- >=2.10, <=2.30
+
+         
+
+
+                                            provider "aws" {
+                                              region  = "us-east-1"
+                                              # access_key = "YOUR_ACCESS_KEY"
+                                              # secret_key = "YOUR_SECRET_KEY"
+                                            }
+
+                                            # resource "<provider>_<resource_type>" "name" {
+                                            #    config options......
+                                            #}
+
+                                             resource "aws_instance" "Test_terraform" {
+                                               ami           = "ami-00514a528eadbc95b"
+                                               instance_type = "t2.micro"
+                                               tags = {
+                                                 Name = "Terraform"
+                                               }
+                                             }
+
+                                             resource "aws_instance" "Test_terraformtwo" {
+                                               ami           = "ami-00514a528eadbc95b"
+                                               instance_type = "t2.micro"
+                                               tags = {
+                                                 Name = "Terraform - 2"
+                                               }
+                                             }
+
+Example:
+---------
+AWS_VPC
+--------
+
+resource "aws_vpc" "terraformvcp" {
+  cidr_block = "10.0.0.0/16"  # ip addr from the VPC
+  tags = {
+    Name = "Prod-VPC"      
+    }
+}
+
+resource "aws_subnet" "terraformsubnet" {
+  vpc_id     = aws_vpc.terraformvcp.id    #vpc_id     = <resource>.<resource_name in the terraqform>.id
+                                         # IP addr of the VCP where the subnet reside in. as it should have to take from the VCP (Not yet created VCP from the acode about).
+ cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "Prod_subnet"
+  }
+}
+
+
+There are two major categories for terraform providers:
+
+HashiCorp Distributed providers - can be downloaded automatically during terraform init.
+-------------------------------
+3rde pary Providers:
+---------------------
+            > terraform init cannot automatically download providers that are not distributed by HashiCorp
+            > It can happen that the official provider does not support specific functionality.
+            > Some organizations might have their proprietary platform for which they want to use Terraform.
+
+How to download the 3rde pary Providers:
+              > Third-party providers must be manually installed, since terraform init cannot automatically download them.
+              > Install third-party providers by placing their plugin executables in the user plugins directory.
+              
+           -----------------------------------------------------
+                OS         |         User Plugins Directory
+            -----------------------------------------------------  
+              WIndows      |      %APPDATA%\terraform.d\plugins
+              other        |         ~/.terraform.d/plugins
+            -----------------------------------------------------
+
+                > Download usimg wget
+                > created the Dir $ mkdir  ~/.terraform.d/plugins
+                > move the dowload file to the foulder  ~/.terraform.d/plugins
+                > run $ terrafrom inti
+
+
+
+Resource:
+https://www.youtube.com/watch?v=SLB_c_ayRMo 
+
+
+

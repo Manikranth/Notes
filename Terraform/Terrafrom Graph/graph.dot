@@ -1,0 +1,8 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+	}
+}
+

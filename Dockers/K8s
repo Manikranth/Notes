@@ -1,0 +1,4 @@
+kubclt run      == docekr dun
+      # kobctl run <name> test --image ngnix
+kubclt create   == docker swarm create
+kubclt apply    == docker stack deploy 

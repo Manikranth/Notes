@@ -1,0 +1,6 @@
+rpm -i DeathStar0_42b.rpm  ## install  rpm packages
+
+
+rpm -ivh puppet-agent-6.17.0-1.el8.x86_64.rpm  ## to install
+rtpm -qpi <package name>                 ## to find info anout the rpm package
+rpm -qa | grep <package name>            ## will list out the traggeted rpm package
