@@ -135,13 +135,7 @@ stages:
       displayName: Enforce policy gate
 ```
 
-Notes:
 
-Pin versions (OPA_VERSION) and verify checksum (OPA_SHA256) — this is table stakes for production supply-chain hygiene.
-
-Use Cache@2 to avoid re-downloading OPA every run.
-
-You can swap opa eval for Conftest if you prefer that workflow.
 
 2) Container job: bring your own image with OPA baked in
 
@@ -188,14 +182,36 @@ Deployment:
 
 
 
-Digram:
-tfplan ---------------v
-Rego    ---------->  OPA
-value (data) ---------^
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Input Data    │    │  Rego Policies  │    │  Data Sources   │
+│     (JSON)      │    │                 │    │                 │
+└─────────┬───────┘    └─────────┬───────┘    └─────────┬───────┘
+          │                      │                      │
+          │                      │                      │
+          └──────────────────────┼──────────────────────┘
+                                 │
+                                 ▼
+                      ┌─────────────────┐
+                      │   OPA Engine    │
+                      │                 │
+                      │ ┌─────────────┐ │
+                      │ │   Policy    │ │
+                      │ │ Evaluation  │ │
+                      │ └─────────────┘ │
+                      └─────────┬───────┘
+                                │
+                                ▼
+                      ┌─────────────────┐
+                      │ Policy Decision │
+                      │   (Allow/Deny)  │
+                      └─────────────────┘
+```
 
 
 
-Value (Policy data)
+## Data source (Policy data):
 External inputs to your policies that aren’t in the Terraform plan or rego.
   - Jason web tiken 
   - as party of quty input
@@ -203,8 +219,8 @@ External inputs to your policies that aren’t in the Terraform plan or rego.
   - budle API
   - http.sebd function inside policy 
 
-  we can this a data 
-  popblem - you have to make extra network calls
+  we can use this as data 
+  *** problem *** - you have to make extra network calls
 
 
 
@@ -227,19 +243,19 @@ You separate “data” from “policy”
   "allowed_vm_types": ["t3.micro", "t3.small", "t3.medium"]
 }
 ```
-This list can list can be featched (by a  script) or they can ypdate in the there Git thta will trigger a pipleine whicj will bundel up the data and policy and store it a any location.
+This list can list can be featched (by a script) or they can update in the there Git that will trigger a pipleine which will bundel up the "data" + "policy" and store it a any location.
 
 
 
 
 
 
-two modes:
+Two modes:
 Pipelines → short-lived OPA, feed latest repo snapshot.
-Runtime / sidecars → long-lived OPA, auto-pulls bundles from a central service.
+Server/ services / sidecars → long-lived OPA, auto-pulls bundles from a central service.
 
 
-## Policy at runtime:
+## Policy at server/services:
 OPA runs as a long-lived server process (or sidecar).
 Other apps/services query it via REST calls
 
@@ -378,7 +394,9 @@ package policy ## this can be any thing
 
 data.json 
 ```json
-allowed_role : ["admin","superuser"]
+{
+  "allowed_roles": ["admin", "superuser"]
+}
 ```
 
 input.json
@@ -436,7 +454,7 @@ A unit test file for your Rego policies.
 Discovered and executed by opa test
 
 
-test.rego is not used in Opa Run time it only used in the pipeline for TEST confident purpose. It would be in the rego repo And runs in the CI process.
+test.rego is not used in Opa as services/server it only used in the pipeline for TEST confident purpose. It would be in the rego repo And runs in the CI process.
 
 - opa fmt → check formatting
 - opa check → validate syntax
@@ -476,3 +494,18 @@ allow if {
 
 ```
 
+
+
+
+## Admission control (cluster level)
+- Runs before objects are persisted in the Kubernetes API server.
+- Validates/denies resource changes (CREATE/UPDATE/DELETE of Pods, Deployments, CRDs, etc.).
+
+- Example rules:
+    - Pods must have owner labels.
+    - Images must come from approved registries.
+
+- No privileged containers in the cluster.
+- It’s not about traffic into your app, it’s about what gets into etcd as a cluster resource.
+
+Think: “guardrails for cluster config/state.”
